@@ -2,6 +2,10 @@ const DATA_URL =
   "https://raw.githubusercontent.com/rukirukixxx/aikatuec-cardlist/main/data/20261008.json";
 
 
+/* ==================================================
+   データ
+================================================== */
+
 let allCards = [];
 
 let selectedSeries = null;
@@ -13,9 +17,9 @@ let selectedType = null;
 let selectedCategory = null;
 
 
-/* =========================
+/* ==================================================
    要素
-========================= */
+================================================== */
 
 const nameSearch =
   document.getElementById("name-search");
@@ -39,9 +43,9 @@ const resultCount =
   document.getElementById("result-count");
 
 
-/* =========================
+/* ==================================================
    JSON読み込み
-========================= */
+================================================== */
 
 fetch(DATA_URL)
 
@@ -71,25 +75,31 @@ fetch(DATA_URL)
 
   .catch(error => {
 
-    cardList.innerHTML =
-      `<p class="no-results">
-        カードデータの読み込みに失敗しました。
-      </p>`;
+    cardList.innerHTML = `
+      <div class="no-results">
+        カードデータの読み込みに失敗しました
+      </div>
+    `;
 
     console.error(error);
 
   });
 
 
-/* =========================
+/* ==================================================
    フィルターボタン作成
-========================= */
+================================================== */
 
 function createFilterButtons() {
 
+  /* 弾 */
+
   createButtons(
     seriesButtons,
-    getUniqueValues(allCards, "series_title"),
+    getUniqueValues(
+      allCards,
+      "series_title"
+    ),
     value => {
 
       selectedSeries =
@@ -105,15 +115,16 @@ function createFilterButtons() {
   );
 
 
-  /*
-    レアリティは
-    N / R / PR / ER
-    の4種類だけ
-  */
+  /* レアリティ */
 
   createButtons(
     rarityButtons,
-    ["N", "R", "PR", "ER"],
+    [
+      "N",
+      "R",
+      "PR",
+      "ER"
+    ],
     value => {
 
       selectedRarity =
@@ -129,9 +140,14 @@ function createFilterButtons() {
   );
 
 
+  /* タイプ */
+
   createButtons(
     typeButtons,
-    getUniqueValues(allCards, "type"),
+    getUniqueValues(
+      allCards,
+      "type"
+    ),
     value => {
 
       selectedType =
@@ -147,9 +163,26 @@ function createFilterButtons() {
   );
 
 
+  /* カテゴリ */
+
+  const categories =
+    getUniqueValues(
+      allCards,
+      "category"
+    )
+    .filter(category => {
+
+      return (
+        category !== "スカート" &&
+        category !== "ブーツ"
+      );
+
+    });
+
+
   createButtons(
     categoryButtons,
-    getUniqueValues(allCards, "category"),
+    categories,
     value => {
 
       selectedCategory =
@@ -167,9 +200,9 @@ function createFilterButtons() {
 }
 
 
-/* =========================
+/* ==================================================
    ボタン生成
-========================= */
+================================================== */
 
 function createButtons(
   container,
@@ -217,9 +250,9 @@ function createButtons(
 }
 
 
-/* =========================
-   選択状態更新
-========================= */
+/* ==================================================
+   選択状態
+================================================== */
 
 function updateButtons() {
 
@@ -272,9 +305,9 @@ function updateButtonGroup(
 }
 
 
-/* =========================
+/* ==================================================
    カード表示
-========================= */
+================================================== */
 
 function displayCards() {
 
@@ -287,20 +320,16 @@ function displayCards() {
   const filtered =
     allCards.filter(card => {
 
-      /*
-        名前検索
-      */
+      /* カード名 */
 
       const matchesName =
         !keyword ||
-        card.name
+        String(card.name)
           .toLowerCase()
           .includes(keyword);
 
 
-      /*
-        弾
-      */
+      /* 弾 */
 
       const matchesSeries =
         !selectedSeries ||
@@ -311,19 +340,20 @@ function displayCards() {
       /*
         レアリティ
 
-        PRを選択
-        → PR + PR★ を表示
+        PR
+        → PR + PR★
 
-        ERを選択
-        → ER + ER★ を表示
+        ER
+        → ER + ER★
 
-        N/R
-        → そのレアリティだけ
+        N / R
+        → それぞれ通常のみ
       */
 
       const matchesRarity =
         !selectedRarity ||
-        card.rarity === selectedRarity ||
+        card.rarity ===
+          selectedRarity ||
         (
           selectedRarity === "PR" &&
           card.rarity === "PR★"
@@ -334,22 +364,20 @@ function displayCards() {
         );
 
 
-      /*
-        タイプ
-      */
+      /* タイプ */
 
       const matchesType =
         !selectedType ||
-        card.type === selectedType;
+        card.type ===
+          selectedType;
 
 
-      /*
-        カテゴリ
-      */
+      /* カテゴリ */
 
       const matchesCategory =
         !selectedCategory ||
-        card.category === selectedCategory;
+        card.category ===
+          selectedCategory;
 
 
       return (
@@ -368,9 +396,9 @@ function displayCards() {
 }
 
 
-/* =========================
+/* ==================================================
    カード描画
-========================= */
+================================================== */
 
 function renderCards(cards) {
 
@@ -383,10 +411,11 @@ function renderCards(cards) {
 
   if (cards.length === 0) {
 
-    cardList.innerHTML =
-      `<div class="no-results">
+    cardList.innerHTML = `
+      <div class="no-results">
         条件に一致するカードがありません
-      </div>`;
+      </div>
+    `;
 
     return;
 
@@ -399,12 +428,9 @@ function renderCards(cards) {
       document.createElement("div");
 
 
-    element.className = "card";
+    element.className =
+      "card";
 
-
-    /*
-      パラレル判定
-    */
 
     const isParallel =
       card.variant === "parallel";
@@ -466,9 +492,9 @@ function renderCards(cards) {
 }
 
 
-/* =========================
+/* ==================================================
    名前検索
-========================= */
+================================================== */
 
 nameSearch.addEventListener(
   "input",
@@ -480,9 +506,9 @@ nameSearch.addEventListener(
 );
 
 
-/* =========================
+/* ==================================================
    重複を除いて取得
-========================= */
+================================================== */
 
 function getUniqueValues(
   cards,
@@ -500,17 +526,32 @@ function getUniqueValues(
 }
 
 
-/* =========================
+/* ==================================================
    HTMLエスケープ
-========================= */
+================================================== */
 
 function escapeHTML(value) {
 
   return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
 }
