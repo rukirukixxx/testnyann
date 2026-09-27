@@ -2,10 +2,6 @@ const DATA_URL =
   "https://raw.githubusercontent.com/rukirukixxx/aikatuec-cardlist/main/data/20261008.json";
 
 
-/* =========================
-   状態
-========================= */
-
 let allCards = [];
 
 let selectedSeries = null;
@@ -13,10 +9,6 @@ let selectedRarity = null;
 let selectedType = null;
 let selectedCategory = null;
 
-
-/* =========================
-   要素
-========================= */
 
 const nameSearch =
   document.getElementById("name-search");
@@ -49,11 +41,9 @@ fetch(DATA_URL)
   .then(response => {
 
     if (!response.ok) {
-
       throw new Error(
         "カードデータを読み込めませんでした。"
       );
-
     }
 
     return response.json();
@@ -84,12 +74,10 @@ fetch(DATA_URL)
 
 
 /* =========================
-   フィルターボタン作成
+   フィルターボタン
 ========================= */
 
 function createFilterButtons() {
-
-  /* 弾 */
 
   createButtons(
     seriesButtons,
@@ -107,7 +95,6 @@ function createFilterButtons() {
           : value;
 
       updateButtons();
-
       displayCards();
 
     }
@@ -117,6 +104,7 @@ function createFilterButtons() {
   /* レアリティ */
 
   createButtons(
+
     rarityButtons,
 
     [
@@ -134,18 +122,14 @@ function createFilterButtons() {
           : value;
 
       updateButtons();
-
       displayCards();
 
     }
+
   );
 
 
   /* タイプ */
-
-  /*
-    ナチュラルは除外
-  */
 
   const types =
     getUniqueValues(
@@ -165,7 +149,9 @@ function createFilterButtons() {
 
 
   createButtons(
+
     typeButtons,
+
     types,
 
     value => {
@@ -176,18 +162,14 @@ function createFilterButtons() {
           : value;
 
       updateButtons();
-
       displayCards();
 
     }
+
   );
 
 
   /* カテゴリ */
-
-  /*
-    スカートとブーツを除外
-  */
 
   const categories =
     getUniqueValues(
@@ -205,7 +187,9 @@ function createFilterButtons() {
 
 
   createButtons(
+
     categoryButtons,
+
     categories,
 
     value => {
@@ -216,10 +200,10 @@ function createFilterButtons() {
           : value;
 
       updateButtons();
-
       displayCards();
 
     }
+
   );
 
 }
@@ -243,16 +227,13 @@ function createButtons(
     const button =
       document.createElement("button");
 
-
     button.type = "button";
 
     button.className =
       "filter-button";
 
-
     button.textContent =
       value;
-
 
     button.dataset.value =
       value;
@@ -276,7 +257,7 @@ function createButtons(
 
 
 /* =========================
-   ボタン選択状態
+   選択状態
 ========================= */
 
 function updateButtons() {
@@ -331,7 +312,7 @@ function updateButtonGroup(
 
 
 /* =========================
-   カード検索・絞り込み
+   絞り込み
 ========================= */
 
 function displayCards() {
@@ -345,17 +326,12 @@ function displayCards() {
   const filtered =
     allCards.filter(card => {
 
-
-      /* カード名 */
-
       const matchesName =
         !keyword ||
         String(card.name)
           .toLowerCase()
           .includes(keyword);
 
-
-      /* 弾 */
 
       const matchesSeries =
         !selectedSeries ||
@@ -364,15 +340,14 @@ function displayCards() {
 
 
       /*
-        レアリティ
+        PRを選択
+        → PRとPR★
 
-        N  → Nのみ
+        ERを選択
+        → ERとER★
 
-        R  → Rのみ
-
-        PR → PR + PR★
-
-        ER → ER + ER★
+        N / R
+        → そのまま
       */
 
       const matchesRarity =
@@ -392,14 +367,10 @@ function displayCards() {
         );
 
 
-      /* タイプ */
-
       const matchesType =
         !selectedType ||
         card.type === selectedType;
 
-
-      /* カテゴリ */
 
       const matchesCategory =
         !selectedCategory ||
@@ -453,9 +424,22 @@ function renderCards(cards) {
       document.createElement("div");
 
 
+    /*
+      ここでCSS用クラスを付ける
+
+      rarity-pr
+      rarity-er
+      rarity-r
+      rarity-n
+
+      type-cute
+      type-cool
+      type-sexy
+      type-pop
+    */
+
     const rarityClass =
       getRarityClass(card.rarity);
-
 
     const typeClass =
       getTypeClass(card.type);
@@ -552,7 +536,7 @@ function renderCards(cards) {
 
 
 /* =========================
-   レアリティ → CSS
+   レアリティ
 ========================= */
 
 function getRarityClass(rarity) {
@@ -561,9 +545,7 @@ function getRarityClass(rarity) {
     rarity === "PR" ||
     rarity === "PR★"
   ) {
-
     return "rarity-pr";
-
   }
 
 
@@ -571,16 +553,12 @@ function getRarityClass(rarity) {
     rarity === "ER" ||
     rarity === "ER★"
   ) {
-
     return "rarity-er";
-
   }
 
 
   if (rarity === "R") {
-
     return "rarity-r";
-
   }
 
 
@@ -589,19 +567,13 @@ function getRarityClass(rarity) {
 }
 
 
-/* =========================
-   レアリティタグ
-========================= */
-
 function getRarityTagClass(rarity) {
 
   if (
     rarity === "PR" ||
     rarity === "PR★"
   ) {
-
     return "pr";
-
   }
 
 
@@ -609,16 +581,12 @@ function getRarityTagClass(rarity) {
     rarity === "ER" ||
     rarity === "ER★"
   ) {
-
     return "er";
-
   }
 
 
   if (rarity === "R") {
-
     return "r";
-
   }
 
 
@@ -628,7 +596,7 @@ function getRarityTagClass(rarity) {
 
 
 /* =========================
-   タイプ → CSS
+   タイプ
 ========================= */
 
 function getTypeClass(type) {
@@ -670,7 +638,7 @@ nameSearch.addEventListener(
 
 
 /* =========================
-   重複を除いて取得
+   重複削除
 ========================= */
 
 function getUniqueValues(
