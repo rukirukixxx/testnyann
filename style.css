@@ -2,13 +2,25 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Noto Sans JP", sans-serif;
+  padding: 0;
+  width: 100%;
+}
 
-  background: #f7f7f9;
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans JP",
+    sans-serif;
+
+  background: #f5f5f7;
   color: #333;
+
+  overflow-x: hidden;
 }
 
 
@@ -20,18 +32,13 @@ header {
   background: white;
   padding: 18px 16px;
 
-  border-bottom: 1px solid #eee;
-
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 header h1 {
   margin: 0;
 
   font-size: 20px;
-  font-weight: 700;
 }
 
 
@@ -40,10 +47,12 @@ header h1 {
 ========================= */
 
 main {
+  width: 100%;
   max-width: 700px;
+
   margin: 0 auto;
 
-  padding: 16px;
+  padding: 14px;
 }
 
 
@@ -56,6 +65,8 @@ main {
   flex-direction: column;
 
   gap: 10px;
+
+  width: 100%;
 }
 
 
@@ -68,15 +79,19 @@ main {
 
   display: grid;
 
-  grid-template-columns: 64px 1fr;
+  grid-template-columns: 58px minmax(0, 1fr);
 
-  grid-template-rows: auto auto auto;
+  grid-template-rows:
+    auto
+    auto
+    auto;
 
   column-gap: 12px;
 
-  padding: 14px 16px;
+  width: 100%;
+  min-width: 0;
 
-  min-height: 100px;
+  padding: 13px 14px;
 
   background: white;
 
@@ -85,31 +100,16 @@ main {
   box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.06);
 
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
-
-  cursor: pointer;
-}
-
-
-/* タップ時 */
-
-.card:active {
-  transform: scale(0.98);
-
-  box-shadow:
-    0 1px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 
 /* =========================
-   カードID
+   左側のID
 ========================= */
 
 .card-id {
   grid-column: 1;
-
   grid-row: 1 / 4;
 
   display: flex;
@@ -117,19 +117,19 @@ main {
   align-items: center;
   justify-content: center;
 
-  width: 56px;
-  height: 56px;
+  width: 50px;
+  height: 50px;
 
-  margin-top: 4px;
+  margin-top: 2px;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   background: #f1f1f4;
 
   color: #777;
 
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 
@@ -143,8 +143,8 @@ main {
 
   min-width: 0;
 
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: bold;
 
   line-height: 1.4;
 
@@ -157,33 +157,35 @@ main {
 
 
 /* =========================
-   下段情報
+   レアリティ
 ========================= */
 
 .card-rarity {
   grid-column: 2;
   grid-row: 2;
 
-  margin-top: 5px;
+  margin-top: 4px;
+
+  color: #e5a000;
 
   font-size: 13px;
-  font-weight: 700;
-
-  color: #f0a400;
+  font-weight: bold;
 }
 
 
-/* ブランド */
+/* =========================
+   ブランド
+========================= */
 
 .card-brand {
   grid-column: 2;
   grid-row: 3;
 
-  display: inline-flex;
+  display: inline-block;
 
   width: fit-content;
 
-  margin-top: 5px;
+  margin-top: 4px;
 
   padding: 3px 8px;
 
@@ -194,12 +196,12 @@ main {
   color: white;
 
   font-size: 11px;
-  font-weight: 700;
+  font-weight: bold;
 }
 
 
 /* =========================
-   不要な情報は非表示
+   不要な情報
 ========================= */
 
 .card-category,
@@ -209,55 +211,80 @@ main {
 
 
 /* =========================
-   矢印
-========================= */
-
-.card::after {
-  content: "›";
-
-  position: absolute;
-
-  right: 14px;
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  color: #bbb;
-
-  font-size: 24px;
-  font-weight: 300;
-}
-
-
-/* =========================
    スマホ
 ========================= */
 
-@media (max-width: 600px) {
+@media screen and (max-width: 800px) {
+
+  header {
+    padding: 16px;
+  }
 
   main {
     padding: 12px;
   }
 
   .card {
-    grid-template-columns: 58px 1fr;
+    grid-template-columns: 54px minmax(0, 1fr);
 
-    padding: 13px 14px;
+    padding: 12px;
 
-    min-height: 94px;
-
-    border-radius: 13px;
+    border-radius: 12px;
   }
 
   .card-id {
-    width: 50px;
-    height: 50px;
-
-    font-size: 12px;
+    width: 46px;
+    height: 46px;
   }
 
-  .card-name {
-    font-size: 15px;
-  }
+}
 
+
+/* =========================
+   ブランドカラー
+========================= */
+
+.card.cute {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 55%,
+      #ffe4f1 100%
+    );
+}
+
+.card.cool {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 55%,
+      #e2f1ff 100%
+    );
+}
+
+.card.sexy {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 55%,
+      #f0e3ff 100%
+    );
+}
+
+.card.pop {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 55%,
+      #fff0d5 100%
+    );
+}
+
+.card.natural {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 55%,
+      #e4f7df 100%
+    );
 }
