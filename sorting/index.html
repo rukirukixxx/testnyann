@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>カードを登録</title>
+
+  <link rel="stylesheet" href="sorting.css">
+
+</head>
+
+
+<body>
+
+  <header>
+    <h1>カードを登録</h1>
+  </header>
+
+
+  <main>
+
+    <!-- =========================
+         カード名検索
+    ========================= -->
+
+    <section class="search-section">
+
+      <label for="name-search">
+        カード名
+      </label>
+
+      <input
+        type="search"
+        id="name-search"
+        placeholder="カード名を入力..."
+      >
+
+    </section>
+
+
+    <!-- =========================
+         弾
+    ========================= -->
+
+    <section class="filter-section">
+
+      <h2>弾</h2>
+
+      <div
+        class="button-list"
+        id="series-buttons"
+      ></div>
+
+    </section>
+
+
+    <!-- =========================
+         レアリティ
+    ========================= -->
+
+    <section class="filter-section">
+
+      <h2>レアリティ</h2>
+
+      <div
+        class="button-list rarity-buttons"
+        id="rarity-buttons"
+      ></div>
+
+    </section>
+
+
+    <!-- =========================
+         タイプ
+    ========================= -->
+
+    <section class="filter-section">
+
+      <h2>タイプ</h2>
+
+      <div
+        class="button-list"
+        id="type-buttons"
+      ></div>
+
+    </section>
+
+
+    <!-- =========================
+         カテゴリ
+    ========================= -->
+
+    <section class="filter-section">
+
+      <h2>カテゴリ</h2>
+
+      <div
+        class="button-list"
+        id="category-buttons"
+      ></div>
+
+    </section>
+
+
+    <!-- =========================
+         候補カード
+    ========================= -->
+
+    <section class="result-section">
+
+      <div class="result-header">
+
+        <h2>候補カード</h2>
+
+        <span id="result-count">
+          0枚
+        </span>
+
+      </div>
+
+
+      <div
+        id="card-list"
+        class="card-list"
+      ></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       下部ナビゲーション
+  ========================= -->
+
+  <nav class="bottom-nav">
+
+    <a
+      href="../"
+      class="bottom-nav-item"
+    >
+
+      <span class="nav-icon">
+        ▣
+      </span>
+
+      <span class="nav-label">
+        カードリスト
+      </span>
+
+    </a>
+
+
+    <a
+      href="../trade/"
+      class="bottom-nav-item"
+    >
+
+      <span class="nav-icon">
+        ⇄
+      </span>
+
+      <span class="nav-label">
+        トレード
+      </span>
+
+    </a>
+
+
+    <a
+      href="./"
+      class="bottom-nav-item add-button active"
+    >
+
+      <span class="add-circle">
+        ＋
+      </span>
+
+      <span class="nav-label">
+        追加
+      </span>
+
+    </a>
+
+
+    <a
+      href="../history/"
+      class="bottom-nav-item"
+    >
+
+      <span class="nav-icon">
+        ◷
+      </span>
+
+      <span class="nav-label">
+        履歴
+      </span>
+
+    </a>
+
+
+    <a
+      href="../settings/"
+      class="bottom-nav-item"
+    >
+
+      <span class="nav-icon">
+        ⚙
+      </span>
+
+      <span class="nav-label">
+        設定
+      </span>
+
+    </a>
+
+  </nav>
+
+
+  <script src="sorting.js"></script>
+
+</body>
+
+</html>
