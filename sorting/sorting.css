@@ -1,20 +1,13 @@
-/* ==================================================
-   基本
-================================================== */
-
 * {
   box-sizing: border-box;
 }
-
 
 html,
 body {
   margin: 0;
   padding: 0;
-
   width: 100%;
 }
-
 
 body {
   font-family:
@@ -37,9 +30,9 @@ body {
 }
 
 
-/* ==================================================
+/* =========================
    ヘッダー
-================================================== */
+========================= */
 
 header {
   position: sticky;
@@ -57,14 +50,11 @@ header {
       #fff5fa
     );
 
-  border-bottom:
-    1px solid #f0dce7;
+  border-bottom: 1px solid #f0dce7;
 
   box-shadow:
-    0 2px 12px
-    rgba(210, 140, 180, 0.08);
+    0 2px 12px rgba(210, 140, 180, 0.08);
 }
-
 
 header h1 {
   margin: 0;
@@ -72,12 +62,10 @@ header h1 {
   color: #d66b9c;
 
   font-size: 20px;
-
   font-weight: 800;
 
   letter-spacing: 0.03em;
 }
-
 
 header h1::before {
   content: "✦ ";
@@ -86,9 +74,9 @@ header h1::before {
 }
 
 
-/* ==================================================
+/* =========================
    メイン
-================================================== */
+========================= */
 
 main {
   width: 100%;
@@ -104,14 +92,13 @@ main {
 }
 
 
-/* ==================================================
+/* =========================
    検索
-================================================== */
+========================= */
 
 .search-section {
   margin-bottom: 18px;
 }
-
 
 .search-section label {
   display: block;
@@ -125,31 +112,6 @@ main {
   font-weight: 700;
 }
 
-
-.search-box {
-  position: relative;
-
-  display: flex;
-
-  align-items: center;
-
-  width: 100%;
-}
-
-
-.search-icon {
-  position: absolute;
-
-  left: 14px;
-
-  color: #d995b4;
-
-  font-size: 14px;
-
-  pointer-events: none;
-}
-
-
 #name-search {
   width: 100%;
 
@@ -157,17 +119,15 @@ main {
 
   padding:
     0
-    14px
-    0
-    38px;
+    14px;
 
   border:
-    1px solid #efd7e3;
+    1px solid
+    #efd7e3;
 
   border-radius: 14px;
 
-  background:
-    rgba(255, 255, 255, 0.95);
+  background: white;
 
   color: #444;
 
@@ -180,7 +140,6 @@ main {
     rgba(210, 140, 180, 0.08);
 }
 
-
 #name-search:focus {
   border-color: #e5a0bf;
 
@@ -189,27 +148,28 @@ main {
     rgba(235, 164, 196, 0.15);
 }
 
-
 #name-search::placeholder {
   color: #bbb;
 }
 
 
-/* ==================================================
+/* =========================
    フィルター
-================================================== */
+========================= */
 
 .filter-section {
   margin-bottom: 17px;
 }
-
 
 .filter-section h2 {
   display: flex;
 
   align-items: center;
 
-  margin: 0 0 8px;
+  margin:
+    0
+    0
+    8px;
 
   color: #666;
 
@@ -217,7 +177,6 @@ main {
 
   font-weight: 800;
 }
-
 
 .filter-section h2::before {
   content: "";
@@ -239,9 +198,9 @@ main {
 }
 
 
-/* ==================================================
+/* =========================
    ボタン
-================================================== */
+========================= */
 
 .button-list {
   display: flex;
@@ -251,7 +210,6 @@ main {
   gap: 6px;
 }
 
-
 .filter-button {
   min-height: 34px;
 
@@ -260,12 +218,12 @@ main {
     11px;
 
   border:
-    1px solid #e6dfe4;
+    1px solid
+    #e6dfe4;
 
   border-radius: 999px;
 
-  background:
-    rgba(255, 255, 255, 0.95);
+  background: white;
 
   color: #666;
 
@@ -286,67 +244,173 @@ main {
     transform 0.1s;
 }
 
-
 .filter-button:active {
   transform: scale(0.95);
 }
 
 
-.filter-button.active {
-  border-color: #df8db3;
-
-  background:
-    linear-gradient(
-      135deg,
-      #e994b9,
-      #b79be9
-    );
-
-  color: white;
-
-  box-shadow:
-    0 3px 8px
-    rgba(210, 130, 180, 0.25);
-}
-
-
-/* ==================================================
-   レアリティ
-================================================== */
+/* =========================
+   レアリティ選択
+========================= */
 
 .rarity-buttons
 .filter-button:nth-child(1) {
   color: #777;
 }
 
-
 .rarity-buttons
 .filter-button:nth-child(2) {
-  color: #4787c7;
+  color: #4380bd;
 }
-
 
 .rarity-buttons
 .filter-button:nth-child(3) {
-  color: #d18a27;
+  color: #d08a22;
 }
-
 
 .rarity-buttons
 .filter-button:nth-child(4) {
-  color: #9b60c4;
+  color: #9b58bd;
 }
-
 
 .rarity-buttons
 .filter-button.active {
   color: white;
+
+  border-color: transparent;
 }
 
 
-/* ==================================================
+/* =========================
+   レアリティ選択中カラー
+========================= */
+
+.rarity-buttons
+.filter-button:nth-child(1).active {
+  background: #888;
+}
+
+.rarity-buttons
+.filter-button:nth-child(2).active {
+  background:
+    linear-gradient(
+      135deg,
+      #73a9df,
+      #477fc0
+    );
+}
+
+.rarity-buttons
+.filter-button:nth-child(3).active {
+  background:
+    linear-gradient(
+      135deg,
+      #f0b85d,
+      #d18a28
+    );
+}
+
+.rarity-buttons
+.filter-button:nth-child(4).active {
+  background:
+    linear-gradient(
+      135deg,
+      #bd7bdd,
+      #9250b5
+    );
+}
+
+
+/* =========================
+   タイプ
+   ※ナチュラルは無し
+========================= */
+
+#type-buttons
+.filter-button[data-value="キュート"] {
+  color: #df6395;
+}
+
+#type-buttons
+.filter-button[data-value="クール"] {
+  color: #5288c9;
+}
+
+#type-buttons
+.filter-button[data-value="セクシー"] {
+  color: #a05fc2;
+}
+
+#type-buttons
+.filter-button[data-value="ポップ"] {
+  color: #dc9135;
+}
+
+
+/* =========================
+   タイプ選択中
+========================= */
+
+#type-buttons
+.filter-button[data-value="キュート"].active {
+  background:
+    linear-gradient(
+      135deg,
+      #f39cbd,
+      #df6d9d
+    );
+
+  border-color: transparent;
+
+  color: white;
+}
+
+#type-buttons
+.filter-button[data-value="クール"].active {
+  background:
+    linear-gradient(
+      135deg,
+      #8bbcf0,
+      #5288c9
+    );
+
+  border-color: transparent;
+
+  color: white;
+}
+
+#type-buttons
+.filter-button[data-value="セクシー"].active {
+  background:
+    linear-gradient(
+      135deg,
+      #d29be9,
+      #a05fc2
+    );
+
+  border-color: transparent;
+
+  color: white;
+}
+
+#type-buttons
+.filter-button[data-value="ポップ"].active {
+  background:
+    linear-gradient(
+      135deg,
+      #f3bd67,
+      #dc9135
+    );
+
+  border-color: transparent;
+
+  color: white;
+}
+
+
+/* =========================
    結果
-================================================== */
+========================= */
 
 .result-section {
   margin-top: 25px;
@@ -354,9 +418,9 @@ main {
   padding-top: 17px;
 
   border-top:
-    1px dashed #e6d6df;
+    1px dashed
+    #e6d6df;
 }
-
 
 .result-header {
   display: flex;
@@ -368,7 +432,6 @@ main {
   margin-bottom: 10px;
 }
 
-
 .result-header h2 {
   margin: 0;
 
@@ -378,19 +441,6 @@ main {
 
   font-weight: 800;
 }
-
-
-.result-header p {
-  margin:
-    2px
-    0
-    0;
-
-  color: #aaa;
-
-  font-size: 10px;
-}
-
 
 #result-count {
   padding:
@@ -409,9 +459,9 @@ main {
 }
 
 
-/* ==================================================
+/* =========================
    カード一覧
-================================================== */
+========================= */
 
 .card-list {
   display: flex;
@@ -422,9 +472,9 @@ main {
 }
 
 
-/* ==================================================
-   カード
-================================================== */
+/* =========================
+   カード本体
+========================= */
 
 .card {
   position: relative;
@@ -448,51 +498,148 @@ main {
     11px
     12px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #ffffff 60%,
-      #fff5fa 100%
-    );
-
   border:
-    1px solid #f0e0e8;
+    1px solid
+    rgba(255, 255, 255, 0.8);
 
   border-radius: 13px;
 
   box-shadow:
-    0 3px 9px
-    rgba(200, 150, 180, 0.08);
+    0 3px 10px
+    rgba(170, 130, 170, 0.12);
 
   overflow: hidden;
 }
 
 
-.card::before {
+/* =========================
+   レアリティ別背景
+========================= */
+
+/* N */
+
+.card.rarity-n {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 15%,
+      #f0f0f3 100%
+    );
+}
+
+
+/* R */
+
+.card.rarity-r {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 10%,
+      #e9f4ff 50%,
+      #d5e9ff 100%
+    );
+}
+
+
+/* PR */
+
+.card.rarity-pr {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 5%,
+      #fff4d8 35%,
+      #ffe5f1 68%,
+      #eadfff 100%
+    );
+}
+
+
+/* ER */
+
+.card.rarity-er {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 5%,
+      #f0e2ff 35%,
+      #ffdef0 68%,
+      #fff0ca 100%
+    );
+}
+
+
+/* =========================
+   タイプ別左側ライン
+========================= */
+
+.card.type-cute::before,
+.card.type-cool::before,
+.card.type-sexy::before,
+.card.type-pop::before {
   content: "";
 
   position: absolute;
 
   left: 0;
-
   top: 0;
-
   bottom: 0;
 
-  width: 3px;
+  width: 4px;
+}
 
+
+/* キュート */
+
+.card.type-cute::before {
   background:
     linear-gradient(
       180deg,
-      #f1a4c4,
-      #c0a6eb
+      #ff9fc5,
+      #ed6d9f
     );
 }
 
 
-/* ==================================================
+/* クール */
+
+.card.type-cool::before {
+  background:
+    linear-gradient(
+      180deg,
+      #8ec5ff,
+      #4c82d1
+    );
+}
+
+
+/* セクシー */
+
+.card.type-sexy::before {
+  background:
+    linear-gradient(
+      180deg,
+      #d9a0f2,
+      #a45bc5
+    );
+}
+
+
+/* ポップ */
+
+.card.type-pop::before {
+  background:
+    linear-gradient(
+      180deg,
+      #ffd27c,
+      #f29a32
+    );
+}
+
+
+/* =========================
    カードID
-================================================== */
+========================= */
 
 .card-id {
   grid-column: 1;
@@ -513,24 +660,78 @@ main {
 
   border-radius: 10px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #f9e9f1,
-      #eee9fb
-    );
-
-  color: #8c7c8a;
-
   font-size: 10px;
 
   font-weight: 800;
+
+  box-shadow:
+    inset
+    0 0 0 1px
+    rgba(255, 255, 255, 0.5);
 }
 
 
-/* ==================================================
+/* =========================
+   IDカラー：キュート
+========================= */
+
+.card.type-cute .card-id {
+  background:
+    linear-gradient(
+      135deg,
+      #ffe0ec,
+      #ffb9d4
+    );
+
+  color: #c95080;
+}
+
+
+/* クール */
+
+.card.type-cool .card-id {
+  background:
+    linear-gradient(
+      135deg,
+      #dceeff,
+      #b6d7ff
+    );
+
+  color: #4b78ad;
+}
+
+
+/* セクシー */
+
+.card.type-sexy .card-id {
+  background:
+    linear-gradient(
+      135deg,
+      #f0dcff,
+      #d8b6ef
+    );
+
+  color: #8b50ad;
+}
+
+
+/* ポップ */
+
+.card.type-pop .card-id {
+  background:
+    linear-gradient(
+      135deg,
+      #fff0ce,
+      #ffd28a
+    );
+
+  color: #bd7920;
+}
+
+
+/* =========================
    カード名
-================================================== */
+========================= */
 
 .card-name {
   grid-column: 2;
@@ -553,9 +754,9 @@ main {
 }
 
 
-/* ==================================================
+/* =========================
    カード情報
-================================================== */
+========================= */
 
 .card-info {
   grid-column: 2;
@@ -563,6 +764,8 @@ main {
   grid-row: 2;
 
   display: flex;
+
+  align-items: center;
 
   flex-wrap: wrap;
 
@@ -572,45 +775,145 @@ main {
 }
 
 
+/* =========================
+   タグ共通
+========================= */
+
 .card-tag {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 19px;
+
   padding:
     3px
-    6px;
+    7px;
 
-  border-radius: 5px;
+  border-radius: 6px;
 
-  background: #f3f1f4;
+  background: #f1f1f3;
 
-  color: #777;
+  color: #666;
 
   font-size: 9px;
 
-  font-weight: 700;
+  font-weight: 800;
 }
 
 
-.card-tag.rarity {
-  background: #fff0d3;
+/* =========================
+   レアリティタグ
+========================= */
 
-  color: #b47a12;
+.card-tag.rarity-n {
+  background: #eeeeef;
+
+  color: #777;
 }
 
+.card-tag.rarity-r {
+  background: #dceeff;
+
+  color: #4178b2;
+}
+
+.card-tag.rarity-pr {
+  background:
+    linear-gradient(
+      135deg,
+      #fff0c9,
+      #ffddec
+    );
+
+  color: #c07920;
+}
+
+.card-tag.rarity-er {
+  background:
+    linear-gradient(
+      135deg,
+      #eadcff,
+      #ffdced
+    );
+
+  color: #8c4fae;
+}
+
+
+/* =========================
+   タイプタグ
+========================= */
+
+.card-tag.type-cute {
+  background: #ffe0ec;
+
+  color: #d25788;
+}
+
+.card-tag.type-cool {
+  background: #dceeff;
+
+  color: #4c7fbd;
+}
+
+.card-tag.type-sexy {
+  background: #edddfa;
+
+  color: #945bb5;
+}
+
+.card-tag.type-pop {
+  background: #ffedc9;
+
+  color: #c07b22;
+}
+
+
+/* =========================
+   パラレル
+========================= */
 
 .card-tag.parallel {
-  background: #f1e4ff;
+  background:
+    linear-gradient(
+      135deg,
+      #f4e6ff,
+      #ffdff1
+    );
 
-  color: #8750ae;
+  color: #8b55aa;
 }
 
 
-/* ==================================================
+/* =========================
+   AP
+========================= */
+
+.card-tag.appeal {
+  background:
+    linear-gradient(
+      135deg,
+      #fff8d9,
+      #ffe7a9
+    );
+
+  color: #aa7b18;
+}
+
+
+/* =========================
    ブランド
-================================================== */
+========================= */
 
 .card-brand {
   grid-column: 2;
 
   grid-row: 3;
+
+  display: flex;
+
+  align-items: center;
 
   margin-top: 4px;
 
@@ -622,9 +925,9 @@ main {
 }
 
 
-/* ==================================================
+/* =========================
    0件
-================================================== */
+========================= */
 
 .no-results {
   padding:
@@ -639,227 +942,9 @@ main {
 }
 
 
-/* ==================================================
-   PCでは下部ナビを隠す
-================================================== */
-
-.bottom-nav {
-  display: none;
-}
-
-
-/* ==================================================
-   スマートフォン
-================================================== */
-
-@media screen and (max-width: 800px) {
-
-  .bottom-nav {
-    position: fixed;
-
-    left: 0;
-
-    right: 0;
-
-    bottom: 0;
-
-    z-index: 1000;
-
-    display: flex;
-
-    align-items: center;
-
-    height: 70px;
-
-    padding:
-      5px
-      4px
-      calc(
-        5px +
-        env(safe-area-inset-bottom)
-      );
-
-    background:
-      rgba(255, 255, 255, 0.96);
-
-    border-top:
-      1px solid #eadfe5;
-
-    box-shadow:
-      0 -3px 15px
-      rgba(190, 140, 170, 0.12);
-
-    backdrop-filter:
-      blur(10px);
-  }
-
-
-  /* =========================
-     ナビ項目
-  ========================= */
-
-  .bottom-nav-item {
-    position: relative;
-
-    flex: 1;
-
-    height: 60px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 3px;
-
-    color: #999;
-
-    text-decoration: none;
-
-    font-size: 10px;
-
-    -webkit-tap-highlight-color:
-      transparent;
-  }
-
-
-  .nav-icon {
-    height: 24px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 20px;
-  }
-
-
-  .nav-label {
-    font-size: 9px;
-
-    line-height: 1.2;
-
-    white-space: nowrap;
-  }
-
-
-  .bottom-nav-item.active {
-    color: #d66b9c;
-
-    font-weight: 800;
-  }
-
-
-  /* =========================
-     中央の追加ボタン
-  ========================= */
-
-  .add-button {
-    position: relative;
-
-    justify-content: center;
-
-    z-index: 2;
-  }
-
-
-  .add-button::before {
-    content: "";
-
-    position: absolute;
-
-    width: 74px;
-
-    height: 74px;
-
-    left: 50%;
-
-    top: -20px;
-
-    transform:
-      translateX(-50%);
-
-    border-radius: 50%;
-
-    background: white;
-
-    border:
-      1px solid #eadce4;
-
-    box-shadow:
-      0 -2px 8px
-      rgba(190, 140, 170, 0.08);
-
-    z-index: -1;
-  }
-
-
-  .add-circle {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 47px;
-
-    height: 47px;
-
-    margin-top: -5px;
-
-    border-radius: 50%;
-
-    background:
-      linear-gradient(
-        135deg,
-        #f39fc2,
-        #b99bea
-      );
-
-    color: white;
-
-    font-size: 27px;
-
-    font-weight: 300;
-
-    line-height: 1;
-
-    box-shadow:
-      0 4px 10px
-      rgba(210, 130, 180, 0.3);
-  }
-
-
-  .add-button .nav-label {
-    margin-top: 2px;
-
-    color: #d66b9c;
-
-    font-weight: 800;
-  }
-
-
-  .bottom-nav-item:active {
-    opacity: 0.7;
-  }
-
-
-  .add-button:active
-  .add-circle {
-    transform: scale(0.94);
-  }
-
-}
-
-
-/* ==================================================
-   小さいスマホ
-================================================== */
+/* =========================
+   スマホ
+========================= */
 
 @media screen and (max-width: 600px) {
 
@@ -870,16 +955,13 @@ main {
       100px;
   }
 
-
   .filter-section {
     margin-bottom: 15px;
   }
 
-
   .button-list {
     gap: 5px;
   }
-
 
   .filter-button {
     min-height: 32px;
@@ -890,7 +972,6 @@ main {
 
     font-size: 11px;
   }
-
 
   .card {
     grid-template-columns:
@@ -904,13 +985,11 @@ main {
       11px;
   }
 
-
   .card-id {
     width: 42px;
 
     height: 42px;
   }
-
 
   .card-name {
     font-size: 13px;
