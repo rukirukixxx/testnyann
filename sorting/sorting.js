@@ -2,24 +2,21 @@ const DATA_URL =
   "https://raw.githubusercontent.com/rukirukixxx/aikatuec-cardlist/main/data/20261008.json";
 
 
-/* ==================================================
-   データ
-================================================== */
+/* =========================
+   状態
+========================= */
 
 let allCards = [];
 
 let selectedSeries = null;
-
 let selectedRarity = null;
-
 let selectedType = null;
-
 let selectedCategory = null;
 
 
-/* ==================================================
+/* =========================
    要素
-================================================== */
+========================= */
 
 const nameSearch =
   document.getElementById("name-search");
@@ -43,9 +40,9 @@ const resultCount =
   document.getElementById("result-count");
 
 
-/* ==================================================
+/* =========================
    JSON読み込み
-================================================== */
+========================= */
 
 fetch(DATA_URL)
 
@@ -86,9 +83,9 @@ fetch(DATA_URL)
   });
 
 
-/* ==================================================
+/* =========================
    フィルターボタン作成
-================================================== */
+========================= */
 
 function createFilterButtons() {
 
@@ -96,10 +93,12 @@ function createFilterButtons() {
 
   createButtons(
     seriesButtons,
+
     getUniqueValues(
       allCards,
       "series_title"
     ),
+
     value => {
 
       selectedSeries =
@@ -119,12 +118,14 @@ function createFilterButtons() {
 
   createButtons(
     rarityButtons,
+
     [
       "N",
       "R",
       "PR",
       "ER"
     ],
+
     value => {
 
       selectedRarity =
@@ -142,12 +143,31 @@ function createFilterButtons() {
 
   /* タイプ */
 
-  createButtons(
-    typeButtons,
+  /*
+    ナチュラルは除外
+  */
+
+  const types =
     getUniqueValues(
       allCards,
       "type"
-    ),
+    )
+    .filter(type => {
+
+      return (
+        type === "キュート" ||
+        type === "クール" ||
+        type === "セクシー" ||
+        type === "ポップ"
+      );
+
+    });
+
+
+  createButtons(
+    typeButtons,
+    types,
+
     value => {
 
       selectedType =
@@ -164,6 +184,10 @@ function createFilterButtons() {
 
 
   /* カテゴリ */
+
+  /*
+    スカートとブーツを除外
+  */
 
   const categories =
     getUniqueValues(
@@ -183,6 +207,7 @@ function createFilterButtons() {
   createButtons(
     categoryButtons,
     categories,
+
     value => {
 
       selectedCategory =
@@ -200,9 +225,9 @@ function createFilterButtons() {
 }
 
 
-/* ==================================================
+/* =========================
    ボタン生成
-================================================== */
+========================= */
 
 function createButtons(
   container,
@@ -250,9 +275,9 @@ function createButtons(
 }
 
 
-/* ==================================================
-   選択状態
-================================================== */
+/* =========================
+   ボタン選択状態
+========================= */
 
 function updateButtons() {
 
@@ -261,18 +286,15 @@ function updateButtons() {
     selectedSeries
   );
 
-
   updateButtonGroup(
     rarityButtons,
     selectedRarity
   );
 
-
   updateButtonGroup(
     typeButtons,
     selectedType
   );
-
 
   updateButtonGroup(
     categoryButtons,
@@ -297,7 +319,10 @@ function updateButtonGroup(
 
     button.classList.toggle(
       "active",
-      button.dataset.value === selected
+
+      button.dataset.value ===
+        selected
+
     );
 
   });
@@ -305,9 +330,9 @@ function updateButtonGroup(
 }
 
 
-/* ==================================================
-   カード表示
-================================================== */
+/* =========================
+   カード検索・絞り込み
+========================= */
 
 function displayCards() {
 
@@ -319,6 +344,7 @@ function displayCards() {
 
   const filtered =
     allCards.filter(card => {
+
 
       /* カード名 */
 
@@ -340,24 +366,26 @@ function displayCards() {
       /*
         レアリティ
 
-        PR
-        → PR + PR★
+        N  → Nのみ
 
-        ER
-        → ER + ER★
+        R  → Rのみ
 
-        N / R
-        → それぞれ通常のみ
+        PR → PR + PR★
+
+        ER → ER + ER★
       */
 
       const matchesRarity =
         !selectedRarity ||
+
         card.rarity ===
           selectedRarity ||
+
         (
           selectedRarity === "PR" &&
           card.rarity === "PR★"
         ) ||
+
         (
           selectedRarity === "ER" &&
           card.rarity === "ER★"
@@ -368,16 +396,14 @@ function displayCards() {
 
       const matchesType =
         !selectedType ||
-        card.type ===
-          selectedType;
+        card.type === selectedType;
 
 
       /* カテゴリ */
 
       const matchesCategory =
         !selectedCategory ||
-        card.category ===
-          selectedCategory;
+        card.category === selectedCategory;
 
 
       return (
@@ -396,14 +422,13 @@ function displayCards() {
 }
 
 
-/* ==================================================
-   カード描画
-================================================== */
+/* =========================
+   カード表示
+========================= */
 
 function renderCards(cards) {
 
   cardList.innerHTML = "";
-
 
   resultCount.textContent =
     `${cards.length}枚`;
@@ -428,12 +453,27 @@ function renderCards(cards) {
       document.createElement("div");
 
 
+    const rarityClass =
+      getRarityClass(card.rarity);
+
+
+    const typeClass =
+      getTypeClass(card.type);
+
+
     element.className =
-      "card";
+      `card ${rarityClass} ${typeClass}`;
 
 
     const isParallel =
       card.variant === "parallel";
+
+
+    const appeal =
+      card.appeal_point !== undefined &&
+      card.appeal_point !== null
+        ? `AP ${card.appeal_point}`
+        : "";
 
 
     element.innerHTML = `
@@ -450,7 +490,9 @@ function renderCards(cards) {
 
       <div class="card-info">
 
-        <span class="card-tag rarity">
+        <span
+          class="card-tag rarity-${getRarityTagClass(card.rarity)}"
+        >
           ${escapeHTML(card.rarity)}
         </span>
 
@@ -466,14 +508,31 @@ function renderCards(cards) {
         }
 
 
-        <span class="card-tag">
-          ${escapeHTML(card.type)}
-        </span>
+        ${
+          typeClass
+            ? `
+              <span class="card-tag ${typeClass}">
+                ${escapeHTML(card.type)}
+              </span>
+            `
+            : ""
+        }
 
 
         <span class="card-tag">
           ${escapeHTML(card.category)}
         </span>
+
+
+        ${
+          appeal
+            ? `
+              <span class="card-tag appeal">
+                ${escapeHTML(appeal)}
+              </span>
+            `
+            : ""
+        }
 
       </div>
 
@@ -492,9 +551,113 @@ function renderCards(cards) {
 }
 
 
-/* ==================================================
+/* =========================
+   レアリティ → CSS
+========================= */
+
+function getRarityClass(rarity) {
+
+  if (
+    rarity === "PR" ||
+    rarity === "PR★"
+  ) {
+
+    return "rarity-pr";
+
+  }
+
+
+  if (
+    rarity === "ER" ||
+    rarity === "ER★"
+  ) {
+
+    return "rarity-er";
+
+  }
+
+
+  if (rarity === "R") {
+
+    return "rarity-r";
+
+  }
+
+
+  return "rarity-n";
+
+}
+
+
+/* =========================
+   レアリティタグ
+========================= */
+
+function getRarityTagClass(rarity) {
+
+  if (
+    rarity === "PR" ||
+    rarity === "PR★"
+  ) {
+
+    return "pr";
+
+  }
+
+
+  if (
+    rarity === "ER" ||
+    rarity === "ER★"
+  ) {
+
+    return "er";
+
+  }
+
+
+  if (rarity === "R") {
+
+    return "r";
+
+  }
+
+
+  return "n";
+
+}
+
+
+/* =========================
+   タイプ → CSS
+========================= */
+
+function getTypeClass(type) {
+
+  switch (type) {
+
+    case "キュート":
+      return "type-cute";
+
+    case "クール":
+      return "type-cool";
+
+    case "セクシー":
+      return "type-sexy";
+
+    case "ポップ":
+      return "type-pop";
+
+    default:
+      return "";
+
+  }
+
+}
+
+
+/* =========================
    名前検索
-================================================== */
+========================= */
 
 nameSearch.addEventListener(
   "input",
@@ -506,9 +669,9 @@ nameSearch.addEventListener(
 );
 
 
-/* ==================================================
+/* =========================
    重複を除いて取得
-================================================== */
+========================= */
 
 function getUniqueValues(
   cards,
@@ -517,38 +680,45 @@ function getUniqueValues(
 
   return [
     ...new Set(
+
       cards
         .map(card => card[key])
         .filter(Boolean)
+
     )
   ];
 
 }
 
 
-/* ==================================================
+/* =========================
    HTMLエスケープ
-================================================== */
+========================= */
 
 function escapeHTML(value) {
 
   return String(value ?? "")
+
     .replaceAll(
       "&",
       "&amp;"
     )
+
     .replaceAll(
       "<",
       "&lt;"
     )
+
     .replaceAll(
       ">",
       "&gt;"
     )
+
     .replaceAll(
       '"',
       "&quot;"
     )
+
     .replaceAll(
       "'",
       "&#039;"
