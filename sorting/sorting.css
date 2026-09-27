@@ -1,0 +1,463 @@
+* {
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+}
+
+
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans JP",
+    sans-serif;
+
+  background: #f6f6f8;
+
+  color: #333;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================
+   ヘッダー
+========================= */
+
+header {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 10;
+
+  background: white;
+
+  padding: 16px;
+
+  border-bottom: 1px solid #e5e5e5;
+}
+
+
+header h1 {
+  margin: 0;
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   メイン
+========================= */
+
+main {
+  width: 100%;
+
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  padding: 16px;
+}
+
+
+/* =========================
+   検索
+========================= */
+
+.search-section {
+  margin-bottom: 22px;
+}
+
+
+.search-section label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+
+#name-search {
+  width: 100%;
+
+  height: 46px;
+
+  padding: 0 14px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 10px;
+
+  background: white;
+
+  font-size: 15px;
+
+  outline: none;
+}
+
+
+#name-search:focus {
+  border-color: #999;
+}
+
+
+/* =========================
+   フィルター
+========================= */
+
+.filter-section {
+  margin-bottom: 22px;
+}
+
+
+.filter-section h2 {
+  margin: 0 0 10px;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   ボタン
+========================= */
+
+.button-list {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+
+.filter-button {
+  min-height: 38px;
+
+  padding: 7px 14px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #444;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+
+
+.filter-button:active {
+  transform: scale(0.97);
+}
+
+
+/* 選択中 */
+
+.filter-button.active {
+  background: #333;
+
+  border-color: #333;
+
+  color: white;
+}
+
+
+/* =========================
+   レアリティ
+========================= */
+
+.rarity-buttons .filter-button:nth-child(1) {
+  color: #555;
+}
+
+.rarity-buttons .filter-button:nth-child(2) {
+  color: #2774c7;
+}
+
+.rarity-buttons .filter-button:nth-child(3) {
+  color: #d38a00;
+}
+
+.rarity-buttons .filter-button:nth-child(4) {
+  color: #9a4cc4;
+}
+
+
+.rarity-buttons .filter-button.active {
+  color: white;
+}
+
+
+/* =========================
+   結果
+========================= */
+
+.result-section {
+  margin-top: 30px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #ddd;
+}
+
+
+.result-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 12px;
+}
+
+
+.result-header h2 {
+  margin: 0;
+
+  font-size: 17px;
+}
+
+
+#result-count {
+  color: #777;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   カード一覧
+========================= */
+
+.card-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+
+/* =========================
+   カード
+========================= */
+
+.card {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    58px
+    minmax(0, 1fr);
+
+  grid-template-rows:
+    auto
+    auto
+    auto;
+
+  column-gap: 12px;
+
+  width: 100%;
+
+  padding: 13px 14px;
+
+  background: white;
+
+  border-radius: 13px;
+
+  box-shadow:
+    0 2px 7px rgba(0, 0, 0, 0.06);
+
+  overflow: hidden;
+}
+
+
+/* =========================
+   カードID
+========================= */
+
+.card-id {
+  grid-column: 1;
+
+  grid-row: 1 / 4;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 50px;
+
+  height: 50px;
+
+  border-radius: 10px;
+
+  background: #f0f0f3;
+
+  color: #666;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   カード名
+========================= */
+
+.card-name {
+  grid-column: 2;
+
+  grid-row: 1;
+
+  min-width: 0;
+
+  padding-right: 20px;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  line-height: 1.4;
+}
+
+
+/* =========================
+   情報
+========================= */
+
+.card-info {
+  grid-column: 2;
+
+  grid-row: 2;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 5px;
+
+  margin-top: 5px;
+}
+
+
+.card-tag {
+  padding: 3px 7px;
+
+  border-radius: 5px;
+
+  background: #f1f1f3;
+
+  color: #555;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+
+/* レアリティ */
+
+.card-tag.rarity {
+  background: #fff1d2;
+
+  color: #b27600;
+}
+
+
+/* パラレル */
+
+.card-tag.parallel {
+  background: #f1e4ff;
+
+  color: #8849b8;
+}
+
+
+/* =========================
+   ブランド
+========================= */
+
+.card-brand {
+  grid-column: 2;
+
+  grid-row: 3;
+
+  margin-top: 5px;
+
+  color: #777;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   0件
+========================= */
+
+.no-results {
+  padding: 30px 10px;
+
+  color: #999;
+
+  text-align: center;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   スマホ
+========================= */
+
+@media screen and (max-width: 600px) {
+
+  main {
+    padding: 14px 12px;
+  }
+
+  .button-list {
+    gap: 7px;
+  }
+
+  .filter-button {
+    min-height: 36px;
+
+    padding: 6px 12px;
+  }
+
+}
