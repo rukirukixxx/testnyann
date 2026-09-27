@@ -4,111 +4,260 @@
 
 body {
   margin: 0;
-  font-family: sans-serif;
-  background: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Noto Sans JP", sans-serif;
+
+  background: #f7f7f9;
   color: #333;
 }
 
+
+/* =========================
+   ヘッダー
+========================= */
+
 header {
   background: white;
-  padding: 24px 32px;
-  border-bottom: 1px solid #ddd;
+  padding: 18px 16px;
+
+  border-bottom: 1px solid #eee;
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 header h1 {
   margin: 0;
-  font-size: 24px;
+
+  font-size: 20px;
+  font-weight: 700;
 }
+
+
+/* =========================
+   メイン
+========================= */
 
 main {
-  max-width: 1400px;
-  margin: 30px auto;
-  padding: 0 20px;
+  max-width: 700px;
+  margin: 0 auto;
+
+  padding: 16px;
 }
 
-/* カード一覧 */
+
+/* =========================
+   カード一覧
+========================= */
 
 .card-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+
+  gap: 10px;
 }
 
-/* 横長カード */
+
+/* =========================
+   カード
+========================= */
 
 .card {
+  position: relative;
+
   display: grid;
 
-  grid-template-columns:
-    90px
-    minmax(250px, 1fr)
-    70px
-    100px
-    100px
-    220px;
+  grid-template-columns: 64px 1fr;
 
-  align-items: center;
+  grid-template-rows: auto auto auto;
 
-  min-height: 64px;
+  column-gap: 12px;
+
+  padding: 14px 16px;
+
+  min-height: 100px;
 
   background: white;
 
-  border-radius: 8px;
+  border-radius: 14px;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  cursor: pointer;
+}
+
+
+/* タップ時 */
+
+.card:active {
+  transform: scale(0.98);
+
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================
+   カードID
+========================= */
+
+.card-id {
+  grid-column: 1;
+
+  grid-row: 1 / 4;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 56px;
+  height: 56px;
+
+  margin-top: 4px;
+
+  border-radius: 12px;
+
+  background: #f1f1f4;
+
+  color: #777;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   カード名
+========================= */
+
+.card-name {
+  grid-column: 2;
+  grid-row: 1;
+
+  min-width: 0;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  line-height: 1.4;
+
+  white-space: nowrap;
 
   overflow: hidden;
 
-  box-shadow:
-    0 1px 4px rgba(0, 0, 0, 0.08);
+  text-overflow: ellipsis;
 }
 
-.card > div {
-  padding: 12px 16px;
-}
 
-.card-id {
-  font-weight: bold;
-  color: #666;
-}
-
-.card-name {
-  font-weight: bold;
-}
+/* =========================
+   下段情報
+========================= */
 
 .card-rarity {
-  text-align: center;
-  font-weight: bold;
+  grid-column: 2;
+  grid-row: 2;
+
+  margin-top: 5px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  color: #f0a400;
 }
 
-.card-category {
-  text-align: center;
-}
 
-.card-appeal {
-  text-align: center;
-  font-weight: bold;
-}
+/* ブランド */
 
 .card-brand {
-  color: white;
-  font-weight: bold;
+  grid-column: 2;
+  grid-row: 3;
+
+  display: inline-flex;
+
+  width: fit-content;
+
+  margin-top: 5px;
+
+  padding: 3px 8px;
+
+  border-radius: 6px;
+
   background: #aaa;
+
+  color: white;
+
+  font-size: 11px;
+  font-weight: 700;
 }
 
-/* スマートフォン */
 
-@media (max-width: 800px) {
+/* =========================
+   不要な情報は非表示
+========================= */
 
-  .card {
-    grid-template-columns:
-      70px
-      1fr
-      60px;
+.card-category,
+.card-appeal {
+  display: none;
+}
+
+
+/* =========================
+   矢印
+========================= */
+
+.card::after {
+  content: "›";
+
+  position: absolute;
+
+  right: 14px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #bbb;
+
+  font-size: 24px;
+  font-weight: 300;
+}
+
+
+/* =========================
+   スマホ
+========================= */
+
+@media (max-width: 600px) {
+
+  main {
+    padding: 12px;
   }
 
-  .card-category,
-  .card-appeal,
-  .card-brand {
-    display: none;
+  .card {
+    grid-template-columns: 58px 1fr;
+
+    padding: 13px 14px;
+
+    min-height: 94px;
+
+    border-radius: 13px;
+  }
+
+  .card-id {
+    width: 50px;
+    height: 50px;
+
+    font-size: 12px;
+  }
+
+  .card-name {
+    font-size: 15px;
   }
 
 }
