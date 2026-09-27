@@ -1,13 +1,20 @@
+/* =========================
+   基本
+========================= */
+
 * {
   box-sizing: border-box;
 }
+
 
 html,
 body {
   margin: 0;
   padding: 0;
+
   width: 100%;
 }
+
 
 body {
   font-family:
@@ -18,6 +25,7 @@ body {
     sans-serif;
 
   background: #f5f5f7;
+
   color: #333;
 
   overflow-x: hidden;
@@ -30,10 +38,12 @@ body {
 
 header {
   background: white;
+
   padding: 18px 16px;
 
   border-bottom: 1px solid #e5e5e5;
 }
+
 
 header h1 {
   margin: 0;
@@ -48,6 +58,7 @@ header h1 {
 
 main {
   width: 100%;
+
   max-width: 700px;
 
   margin: 0 auto;
@@ -62,6 +73,7 @@ main {
 
 .card-list {
   display: flex;
+
   flex-direction: column;
 
   gap: 10px;
@@ -79,7 +91,9 @@ main {
 
   display: grid;
 
-  grid-template-columns: 58px minmax(0, 1fr);
+  grid-template-columns:
+    58px
+    minmax(0, 1fr);
 
   grid-template-rows:
     auto
@@ -89,6 +103,7 @@ main {
   column-gap: 12px;
 
   width: 100%;
+
   min-width: 0;
 
   padding: 13px 14px;
@@ -110,14 +125,17 @@ main {
 
 .card-id {
   grid-column: 1;
+
   grid-row: 1 / 4;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   width: 50px;
+
   height: 50px;
 
   margin-top: 2px;
@@ -129,6 +147,7 @@ main {
   color: #777;
 
   font-size: 12px;
+
   font-weight: bold;
 }
 
@@ -139,11 +158,13 @@ main {
 
 .card-name {
   grid-column: 2;
+
   grid-row: 1;
 
   min-width: 0;
 
   font-size: 15px;
+
   font-weight: bold;
 
   line-height: 1.4;
@@ -162,6 +183,7 @@ main {
 
 .card-rarity {
   grid-column: 2;
+
   grid-row: 2;
 
   margin-top: 4px;
@@ -169,6 +191,7 @@ main {
   color: #e5a000;
 
   font-size: 13px;
+
   font-weight: bold;
 }
 
@@ -179,6 +202,7 @@ main {
 
 .card-brand {
   grid-column: 2;
+
   grid-row: 3;
 
   display: inline-block;
@@ -196,6 +220,7 @@ main {
   color: white;
 
   font-size: 11px;
+
   font-weight: bold;
 }
 
@@ -211,37 +236,7 @@ main {
 
 
 /* =========================
-   スマホ
-========================= */
-
-@media screen and (max-width: 800px) {
-
-  header {
-    padding: 16px;
-  }
-
-  main {
-    padding: 12px;
-  }
-
-  .card {
-    grid-template-columns: 54px minmax(0, 1fr);
-
-    padding: 12px;
-
-    border-radius: 12px;
-  }
-
-  .card-id {
-    width: 46px;
-    height: 46px;
-  }
-
-}
-
-
-/* =========================
-   ブランドカラー
+   タイプ別グラデーション
 ========================= */
 
 .card.cute {
@@ -253,6 +248,7 @@ main {
     );
 }
 
+
 .card.cool {
   background:
     linear-gradient(
@@ -261,6 +257,7 @@ main {
       #e2f1ff 100%
     );
 }
+
 
 .card.sexy {
   background:
@@ -271,6 +268,7 @@ main {
     );
 }
 
+
 .card.pop {
   background:
     linear-gradient(
@@ -280,6 +278,7 @@ main {
     );
 }
 
+
 .card.natural {
   background:
     linear-gradient(
@@ -287,4 +286,305 @@ main {
       #ffffff 55%,
       #e4f7df 100%
     );
+}
+
+
+/* =========================
+   スマホ
+========================= */
+
+@media screen and (max-width: 800px) {
+
+  header {
+    padding: 16px;
+  }
+
+
+  main {
+    padding: 12px;
+
+    /* 下部メニュー分の余白 */
+
+    padding-bottom: 90px;
+  }
+
+
+  .card {
+    grid-template-columns:
+      54px
+      minmax(0, 1fr);
+
+    padding: 12px;
+
+    border-radius: 12px;
+  }
+
+
+  .card-id {
+    width: 46px;
+
+    height: 46px;
+  }
+
+}
+
+
+/* ==================================================
+   スマホ下部ナビゲーション
+================================================== */
+
+.bottom-nav {
+  display: none;
+}
+
+
+@media screen and (max-width: 800px) {
+
+  .bottom-nav {
+
+    position: fixed;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    z-index: 1000;
+
+
+    display: flex;
+
+    align-items: center;
+
+
+    height: 70px;
+
+
+    padding:
+      5px
+      4px
+      calc(
+        5px + env(safe-area-inset-bottom)
+      );
+
+
+    background: white;
+
+
+    border-top:
+      1px solid #e5e5e5;
+
+
+    box-shadow:
+      0 -2px 12px
+      rgba(0, 0, 0, 0.08);
+  }
+
+
+  /* =========================
+     各メニュー
+  ========================= */
+
+  .bottom-nav-item {
+
+    position: relative;
+
+    flex: 1;
+
+    height: 60px;
+
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+    gap: 3px;
+
+
+    color: #888;
+
+
+    text-decoration: none;
+
+
+    font-size: 10px;
+
+
+    -webkit-tap-highlight-color:
+      transparent;
+  }
+
+
+  .nav-icon {
+
+    height: 24px;
+
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+    font-size: 21px;
+
+    line-height: 1;
+  }
+
+
+  .nav-label {
+
+    font-size: 10px;
+
+    line-height: 1.2;
+
+
+    white-space: nowrap;
+  }
+
+
+  /* =========================
+     現在のページ
+  ========================= */
+
+  .bottom-nav-item.active {
+
+    color: #333;
+
+    font-weight: 700;
+  }
+
+
+  /* =========================
+     中央「追加」
+  ========================= */
+
+  .add-button {
+
+    position: relative;
+
+    justify-content: center;
+
+    z-index: 2;
+  }
+
+
+  /*
+     下部ナビ中央を
+     丸く盛り上げる
+  */
+
+  .add-button::before {
+
+    content: "";
+
+    position: absolute;
+
+
+    width: 72px;
+
+    height: 72px;
+
+
+    left: 50%;
+
+    top: -20px;
+
+
+    transform:
+      translateX(-50%);
+
+
+    border-radius: 50%;
+
+
+    background: white;
+
+
+    border:
+      1px solid #e5e5e5;
+
+
+    z-index: -1;
+  }
+
+
+  /* =========================
+     ＋ボタン
+  ========================= */
+
+  .add-circle {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+    width: 46px;
+
+    height: 46px;
+
+
+    margin-top: -5px;
+
+
+    border-radius: 50%;
+
+
+    background: #333;
+
+    color: white;
+
+
+    font-size: 27px;
+
+    font-weight: 300;
+
+    line-height: 1;
+
+
+    box-shadow:
+      0 3px 8px
+      rgba(0, 0, 0, 0.16);
+  }
+
+
+  .add-button .nav-label {
+
+    margin-top: 2px;
+
+
+    color: #333;
+
+
+    font-weight: 700;
+  }
+
+
+  /* =========================
+     タップ時
+  ========================= */
+
+  .bottom-nav-item:active {
+
+    opacity: 0.65;
+  }
+
+
+  .add-button:active
+  .add-circle {
+
+    transform:
+      scale(0.94);
+  }
+
 }
