@@ -26,9 +26,7 @@
 
   <main>
 
-    <!-- =========================
-         カード名検索
-    ========================= -->
+    <!-- カード名検索 -->
 
     <section class="search-section">
 
@@ -36,18 +34,24 @@
         カード名
       </label>
 
-      <input
-        type="search"
-        id="name-search"
-        placeholder="カード名を入力..."
-      >
+      <div class="search-box">
+
+        <span class="search-icon">
+          🔍
+        </span>
+
+        <input
+          type="search"
+          id="name-search"
+          placeholder="カード名を入力..."
+        >
+
+      </div>
 
     </section>
 
 
-    <!-- =========================
-         弾
-    ========================= -->
+    <!-- 弾 -->
 
     <section class="filter-section">
 
@@ -61,9 +65,7 @@
     </section>
 
 
-    <!-- =========================
-         レアリティ
-    ========================= -->
+    <!-- レアリティ -->
 
     <section class="filter-section">
 
@@ -77,9 +79,7 @@
     </section>
 
 
-    <!-- =========================
-         タイプ
-    ========================= -->
+    <!-- タイプ -->
 
     <section class="filter-section">
 
@@ -93,9 +93,7 @@
     </section>
 
 
-    <!-- =========================
-         カテゴリ
-    ========================= -->
+    <!-- カテゴリ -->
 
     <section class="filter-section">
 
@@ -109,15 +107,21 @@
     </section>
 
 
-    <!-- =========================
-         候補カード
-    ========================= -->
+    <!-- 候補カード -->
 
     <section class="result-section">
 
       <div class="result-header">
 
-        <h2>候補カード</h2>
+        <div>
+
+          <h2>候補カード</h2>
+
+          <p>
+            条件に合うカード
+          </p>
+
+        </div>
 
         <span id="result-count">
           0枚
@@ -136,9 +140,7 @@
   </main>
 
 
-  <!-- =========================
-       下部ナビゲーション
-  ========================= -->
+  <!-- 下部ナビ -->
 
   <nav class="bottom-nav">
 
