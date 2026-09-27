@@ -1,0 +1,114 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+header {
+  background: white;
+  padding: 24px 32px;
+  border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+main {
+  max-width: 1400px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* カード一覧 */
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 横長カード */
+
+.card {
+  display: grid;
+
+  grid-template-columns:
+    90px
+    minmax(250px, 1fr)
+    70px
+    100px
+    100px
+    220px;
+
+  align-items: center;
+
+  min-height: 64px;
+
+  background: white;
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.card > div {
+  padding: 12px 16px;
+}
+
+.card-id {
+  font-weight: bold;
+  color: #666;
+}
+
+.card-name {
+  font-weight: bold;
+}
+
+.card-rarity {
+  text-align: center;
+  font-weight: bold;
+}
+
+.card-category {
+  text-align: center;
+}
+
+.card-appeal {
+  text-align: center;
+  font-weight: bold;
+}
+
+.card-brand {
+  color: white;
+  font-weight: bold;
+  background: #aaa;
+}
+
+/* スマートフォン */
+
+@media (max-width: 800px) {
+
+  .card {
+    grid-template-columns:
+      70px
+      1fr
+      60px;
+  }
+
+  .card-category,
+  .card-appeal,
+  .card-brand {
+    display: none;
+  }
+
+}
