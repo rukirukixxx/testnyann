@@ -41,9 +41,11 @@ fetch(DATA_URL)
   .then(response => {
 
     if (!response.ok) {
+
       throw new Error(
         "カードデータを読み込めませんでした。"
       );
+
     }
 
     return response.json();
@@ -79,13 +81,17 @@ fetch(DATA_URL)
 
 function createFilterButtons() {
 
-  /* 弾 */
+
+  /* =========================
+     弾
+  ========================= */
 
   const series =
     getUniqueValues(
       allCards,
       "series_title"
     );
+
 
   createButtons(
     seriesButtons,
@@ -98,15 +104,19 @@ function createFilterButtons() {
           : value;
 
       updateButtons();
+
       displayCards();
 
     }
   );
 
 
-  /* レアリティ */
+  /* =========================
+     レアリティ
+  ========================= */
 
   createButtons(
+
     rarityButtons,
 
     [
@@ -124,13 +134,17 @@ function createFilterButtons() {
           : value;
 
       updateButtons();
+
       displayCards();
 
     }
+
   );
 
 
-  /* タイプ */
+  /* =========================
+     タイプ
+  ========================= */
 
   const types =
     getUniqueValues(
@@ -160,13 +174,16 @@ function createFilterButtons() {
           : value;
 
       updateButtons();
+
       displayCards();
 
     }
   );
 
 
-  /* カテゴリ */
+  /* =========================
+     カテゴリ
+  ========================= */
 
   const categories =
     getUniqueValues(
@@ -194,6 +211,7 @@ function createFilterButtons() {
           : value;
 
       updateButtons();
+
       displayCards();
 
     }
@@ -214,21 +232,28 @@ function createButtons(
 
   container.innerHTML = "";
 
+
   values.forEach(value => {
 
     const button =
       document.createElement("button");
 
-    button.type = "button";
+
+    button.type =
+      "button";
+
 
     button.className =
       "filter-button";
 
+
     button.textContent =
       value;
 
+
     button.dataset.value =
       value;
+
 
     button.addEventListener(
       "click",
@@ -239,6 +264,7 @@ function createButtons(
       }
     );
 
+
     container.appendChild(button);
 
   });
@@ -247,7 +273,7 @@ function createButtons(
 
 
 /* =========================
-   選択状態
+   選択状態更新
 ========================= */
 
 function updateButtons() {
@@ -257,15 +283,18 @@ function updateButtons() {
     selectedSeries
   );
 
+
   updateButtonGroup(
     rarityButtons,
     selectedRarity
   );
 
+
   updateButtonGroup(
     typeButtons,
     selectedType
   );
+
 
   updateButtonGroup(
     categoryButtons,
@@ -284,6 +313,7 @@ function updateButtonGroup(
     container.querySelectorAll(
       ".filter-button"
     );
+
 
   buttons.forEach(button => {
 
@@ -312,7 +342,8 @@ function displayCards() {
   const filtered =
     allCards.filter(card => {
 
-      /* 名前 */
+
+      /* カード名 */
 
       const matchesName =
         !keyword ||
@@ -328,16 +359,14 @@ function displayCards() {
         card.series_title === selectedSeries;
 
 
-      /*
-        PR
-        → PR + PR★
+      /* =========================
+         レアリティ
 
-        ER
-        → ER + ER★
+         PR → PR + PR★
+         ER → ER + ER★
 
-        N / R
-        → そのまま
-      */
+         N / R → そのまま
+      ========================= */
 
       const matchesRarity =
         !selectedRarity ||
@@ -393,6 +422,7 @@ function renderCards(cards) {
 
   cardList.innerHTML = "";
 
+
   resultCount.textContent =
     `${cards.length}枚`;
 
@@ -406,6 +436,7 @@ function renderCards(cards) {
     `;
 
     return;
+
   }
 
 
@@ -415,16 +446,13 @@ function renderCards(cards) {
       document.createElement("div");
 
 
-    /*
-      カード背景
-
-      rarityではなく
-      typeだけで決定する
-    */
+    /* タイプ */
 
     const typeClass =
       getTypeClass(card.type);
 
+
+    /* レアリティ */
 
     const rarityClass =
       getRarityClass(card.rarity);
@@ -434,7 +462,7 @@ function renderCards(cards) {
       `card ${typeClass} ${rarityClass}`;
 
 
-    /* パラレル判定 */
+    /* パラレル */
 
     const isParallel =
       card.variant === "parallel";
@@ -535,7 +563,7 @@ function renderCards(cards) {
 
 
 /* =========================
-   レアリティ
+   レアリティクラス
 ========================= */
 
 function getRarityClass(rarity) {
@@ -595,7 +623,7 @@ function getRarityTagClass(rarity) {
 
 
 /* =========================
-   タイプ
+   タイプクラス
 ========================= */
 
 function getTypeClass(type) {
