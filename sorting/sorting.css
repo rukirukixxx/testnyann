@@ -1,591 +1,595 @@
-const DATA_URL =
-  "https://raw.githubusercontent.com/rukirukixxx/aikatuec-cardlist/main/data/20261008.json";
-
-
-/* =========================
-   状態
-========================= */
-
-let allCards = [];
-
-let selectedSeries = null;
-let selectedRarity = null;
-let selectedType = null;
-let selectedCategory = null;
-
-
-/* =========================
-   要素
-========================= */
-
-const nameSearch =
-  document.getElementById("name-search");
-
-const seriesButtons =
-  document.getElementById("series-buttons");
-
-const rarityButtons =
-  document.getElementById("rarity-buttons");
-
-const typeButtons =
-  document.getElementById("type-buttons");
-
-const categoryButtons =
-  document.getElementById("category-buttons");
-
-const cardList =
-  document.getElementById("card-list");
-
-const resultCount =
-  document.getElementById("result-count");
-
-
-/* =========================
-   JSON読み込み
-========================= */
-
-fetch(DATA_URL)
-
-  .then(response => {
-
-    if (!response.ok) {
-
-      throw new Error(
-        "カードデータを読み込めませんでした。"
-      );
-
-    }
-
-    return response.json();
-
-  })
-
-  .then(cards => {
-
-    allCards = cards;
-
-    createFilterButtons();
-
-    displayCards();
-
-  })
-
-  .catch(error => {
-
-    cardList.innerHTML = `
-      <div class="no-results">
-        カードデータの読み込みに失敗しました
-      </div>
-    `;
-
-    console.error(error);
-
-  });
-
-
-/* =========================
-   フィルターボタン作成
-========================= */
-
-function createFilterButtons() {
-
-  /* 弾 */
-
-  createButtons(
-    seriesButtons,
-
-    getUniqueValues(
-      allCards,
-      "series_title"
-    ),
-
-    value => {
-
-      selectedSeries =
-        selectedSeries === value
-          ? null
-          : value;
-
-      updateButtons();
-
-      displayCards();
-
-    }
-  );
-
-
-  /* レアリティ */
-
-  createButtons(
-    rarityButtons,
-
-    [
-      "N",
-      "R",
-      "PR",
-      "ER"
-    ],
-
-    value => {
-
-      selectedRarity =
-        selectedRarity === value
-          ? null
-          : value;
-
-      updateButtons();
-
-      displayCards();
-
-    }
-  );
-
-
-  /* タイプ */
-
-  /*
-    ナチュラルは除外
-  */
-
-  const types =
-    getUniqueValues(
-      allCards,
-      "type"
-    )
-    .filter(type => {
-
-      return (
-        type === "キュート" ||
-        type === "クール" ||
-        type === "セクシー" ||
-        type === "ポップ"
-      );
-
-    });
-
-
-  createButtons(
-    typeButtons,
-    types,
-
-    value => {
-
-      selectedType =
-        selectedType === value
-          ? null
-          : value;
-
-      updateButtons();
-
-      displayCards();
-
-    }
-  );
-
-
-  /* カテゴリ */
-
-  /*
-    スカートとブーツを除外
-  */
-
-  const categories =
-    getUniqueValues(
-      allCards,
-      "category"
-    )
-    .filter(category => {
-
-      return (
-        category !== "スカート" &&
-        category !== "ブーツ"
-      );
-
-    });
-
-
-  createButtons(
-    categoryButtons,
-    categories,
-
-    value => {
-
-      selectedCategory =
-        selectedCategory === value
-          ? null
-          : value;
-
-      updateButtons();
-
-      displayCards();
-
-    }
-  );
-
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans JP",
+    sans-serif;
+
+  background: #f8f6f8;
+  color: #333;
+
+  overflow-x: hidden;
 }
 
 
 /* =========================
-   ボタン生成
+   ヘッダー
 ========================= */
 
-function createButtons(
-  container,
-  values,
-  onClick
-) {
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
-  container.innerHTML = "";
+  background: rgba(255, 255, 255, 0.96);
 
+  padding: 16px;
 
-  values.forEach(value => {
+  border-bottom: 1px solid #e8e3e7;
 
-    const button =
-      document.createElement("button");
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.04);
+}
 
+header h1 {
+  margin: 0;
 
-    button.type = "button";
+  color: #555;
 
-    button.className =
-      "filter-button";
-
-
-    button.textContent =
-      value;
-
-
-    button.dataset.value =
-      value;
+  font-size: 20px;
+  font-weight: 700;
+}
 
 
-    button.addEventListener(
-      "click",
-      () => {
+/* =========================
+   メイン
+========================= */
 
-        onClick(value);
+main {
+  width: 100%;
+  max-width: 650px;
 
-      }
+  margin: 0 auto;
+
+  padding: 14px 14px 40px;
+}
+
+
+/* =========================
+   検索
+========================= */
+
+.search-section {
+  margin-bottom: 20px;
+}
+
+.search-section label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #666;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#name-search {
+  width: 100%;
+  height: 44px;
+
+  padding: 0 14px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 11px;
+
+  background: white;
+
+  color: #333;
+
+  font-size: 14px;
+
+  outline: none;
+
+  box-shadow:
+    0 2px 7px rgba(0, 0, 0, 0.04);
+}
+
+#name-search:focus {
+  border-color: #bbb;
+}
+
+
+/* =========================
+   フィルター
+========================= */
+
+.filter-section {
+  margin-bottom: 19px;
+}
+
+.filter-section h2 {
+  margin: 0 0 9px;
+
+  color: #555;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   ボタン
+========================= */
+
+.button-list {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+.filter-button {
+  min-height: 35px;
+
+  padding: 6px 12px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #555;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s,
+    transform 0.1s;
+}
+
+.filter-button:active {
+  transform: scale(0.96);
+}
+
+.filter-button.active {
+  background: #444;
+
+  border-color: #444;
+
+  color: white;
+}
+
+
+/* =========================
+   レアリティ選択ボタン
+========================= */
+
+.rarity-buttons
+.filter-button:nth-child(1) {
+  color: #777;
+}
+
+.rarity-buttons
+.filter-button:nth-child(2) {
+  color: #3f78b5;
+}
+
+.rarity-buttons
+.filter-button:nth-child(3) {
+  color: #c7831e;
+}
+
+.rarity-buttons
+.filter-button:nth-child(4) {
+  color: #9150b2;
+}
+
+.rarity-buttons
+.filter-button.active {
+  color: white;
+}
+
+.rarity-buttons
+.filter-button:nth-child(1).active {
+  background: #888;
+  border-color: #888;
+}
+
+.rarity-buttons
+.filter-button:nth-child(2).active {
+  background: #5c94ce;
+  border-color: #5c94ce;
+}
+
+.rarity-buttons
+.filter-button:nth-child(3).active {
+  background: #d39a42;
+  border-color: #d39a42;
+}
+
+.rarity-buttons
+.filter-button:nth-child(4).active {
+  background: #a264c0;
+  border-color: #a264c0;
+}
+
+
+/* =========================
+   タイプ選択ボタン
+========================= */
+
+#type-buttons
+.filter-button[data-value="キュート"] {
+  color: #d65a89;
+}
+
+#type-buttons
+.filter-button[data-value="クール"] {
+  color: #477eb9;
+}
+
+#type-buttons
+.filter-button[data-value="セクシー"] {
+  color: #9556b4;
+}
+
+#type-buttons
+.filter-button[data-value="ポップ"] {
+  color: #c27b1e;
+}
+
+
+#type-buttons
+.filter-button[data-value="キュート"].active {
+  background: #e879a4;
+  border-color: #e879a4;
+  color: white;
+}
+
+#type-buttons
+.filter-button[data-value="クール"].active {
+  background: #629bd1;
+  border-color: #629bd1;
+  color: white;
+}
+
+#type-buttons
+.filter-button[data-value="セクシー"].active {
+  background: #a669c1;
+  border-color: #a669c1;
+  color: white;
+}
+
+#type-buttons
+.filter-button[data-value="ポップ"].active {
+  background: #d99a42;
+  border-color: #d99a42;
+  color: white;
+}
+
+
+/* =========================
+   結果
+========================= */
+
+.result-section {
+  margin-top: 28px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid #ddd;
+}
+
+.result-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 11px;
+}
+
+.result-header h2 {
+  margin: 0;
+
+  color: #555;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#result-count {
+  color: #888;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   カード一覧
+========================= */
+
+.card-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+}
+
+
+/* =========================
+   カード本体
+========================= */
+
+.card {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    52px
+    minmax(0, 1fr);
+
+  grid-template-rows:
+    auto
+    auto
+    auto;
+
+  column-gap: 10px;
+
+  width: 100%;
+
+  padding: 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  border-radius: 13px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================
+   レアリティ別カード背景
+========================= */
+
+/* N */
+
+.card.rarity-n {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8f8f9 55%,
+      #ededee 100%
+    );
+}
+
+
+/* R */
+
+.card.rarity-r {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f3f9ff 45%,
+      #d9edff 100%
+    );
+}
+
+
+/* PR */
+
+.card.rarity-pr {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #fff9e9 30%,
+      #ffe7f0 70%,
+      #f3e8ff 100%
+    );
+}
+
+
+/* ER */
+
+.card.rarity-er {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f2e7ff 30%,
+      #eadcff 55%,
+      #ffddeb 100%
+    );
+}
+
+
+/* =========================
+   ID部分
+   タイプ別カラー
+========================= */
+
+.card-id {
+  grid-column: 1;
+  grid-row: 1 / 4;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  margin-top: 1px;
+
+  border-radius: 10px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(255, 255, 255, 0.65);
+}
+
+
+/* キュート */
+
+.card.type-cute .card-id {
+  background:
+    linear-gradient(
+      135deg,
+      #ffd9e7,
+      #ff9fc4
     );
 
-
-    container.appendChild(button);
-
-  });
-
+  color: #c84e7c;
 }
 
 
-/* =========================
-   ボタン選択状態
-========================= */
+/* クール */
 
-function updateButtons() {
-
-  updateButtonGroup(
-    seriesButtons,
-    selectedSeries
-  );
-
-  updateButtonGroup(
-    rarityButtons,
-    selectedRarity
-  );
-
-  updateButtonGroup(
-    typeButtons,
-    selectedType
-  );
-
-  updateButtonGroup(
-    categoryButtons,
-    selectedCategory
-  );
-
-}
-
-
-function updateButtonGroup(
-  container,
-  selected
-) {
-
-  const buttons =
-    container.querySelectorAll(
-      ".filter-button"
+.card.type-cool .card-id {
+  background:
+    linear-gradient(
+      135deg,
+      #dceeff,
+      #91c4f2
     );
 
+  color: #3f73ad;
+}
 
-  buttons.forEach(button => {
 
-    button.classList.toggle(
-      "active",
+/* セクシー */
 
-      button.dataset.value ===
-        selected
-
+.card.type-sexy .card-id {
+  background:
+    linear-gradient(
+      135deg,
+      #f0ddff,
+      #d09ae8
     );
 
-  });
+  color: #824ba5;
+}
 
+
+/* ポップ */
+
+.card.type-pop .card-id {
+  background:
+    linear-gradient(
+      135deg,
+      #fff0ce,
+      #ffc96d
+    );
+
+  color: #ae6b17;
+}
+
+
+/* タイプ不明 */
+
+.card-id {
+  background:
+    linear-gradient(
+      135deg,
+      #eeeeee,
+      #dddddd
+    );
+
+  color: #777;
 }
 
 
 /* =========================
-   カード検索・絞り込み
+   カード名
 ========================= */
 
-function displayCards() {
+.card-name {
+  grid-column: 2;
+  grid-row: 1;
 
-  const keyword =
-    nameSearch.value
-      .trim()
-      .toLowerCase();
+  min-width: 0;
 
+  color: #444;
 
-  const filtered =
-    allCards.filter(card => {
+  font-size: 14px;
+  font-weight: 700;
 
+  line-height: 1.4;
 
-      /* カード名 */
-
-      const matchesName =
-        !keyword ||
-        String(card.name)
-          .toLowerCase()
-          .includes(keyword);
-
-
-      /* 弾 */
-
-      const matchesSeries =
-        !selectedSeries ||
-        card.series_title ===
-          selectedSeries;
-
-
-      /*
-        レアリティ
-
-        N  → Nのみ
-
-        R  → Rのみ
-
-        PR → PR + PR★
-
-        ER → ER + ER★
-      */
-
-      const matchesRarity =
-        !selectedRarity ||
-
-        card.rarity ===
-          selectedRarity ||
-
-        (
-          selectedRarity === "PR" &&
-          card.rarity === "PR★"
-        ) ||
-
-        (
-          selectedRarity === "ER" &&
-          card.rarity === "ER★"
-        );
-
-
-      /* タイプ */
-
-      const matchesType =
-        !selectedType ||
-        card.type === selectedType;
-
-
-      /* カテゴリ */
-
-      const matchesCategory =
-        !selectedCategory ||
-        card.category === selectedCategory;
-
-
-      return (
-        matchesName &&
-        matchesSeries &&
-        matchesRarity &&
-        matchesType &&
-        matchesCategory
-      );
-
-    });
-
-
-  renderCards(filtered);
-
+  word-break: break-word;
 }
 
 
 /* =========================
-   カード表示
+   情報タグ
 ========================= */
 
-function renderCards(cards) {
+.card-info {
+  grid-column: 2;
+  grid-row: 2;
 
-  cardList.innerHTML = "";
+  display: flex;
 
-  resultCount.textContent =
-    `${cards.length}枚`;
+  align-items: center;
 
+  flex-wrap: wrap;
 
-  if (cards.length === 0) {
+  gap: 5px;
 
-    cardList.innerHTML = `
-      <div class="no-results">
-        条件に一致するカードがありません
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  cards.forEach(card => {
-
-    const element =
-      document.createElement("div");
-
-
-    const rarityClass =
-      getRarityClass(card.rarity);
-
-
-    const typeClass =
-      getTypeClass(card.type);
-
-
-    element.className =
-      `card ${rarityClass} ${typeClass}`;
-
-
-    const isParallel =
-      card.variant === "parallel";
-
-
-    const appeal =
-      card.appeal_point !== undefined &&
-      card.appeal_point !== null
-        ? `AP ${card.appeal_point}`
-        : "";
-
-
-    element.innerHTML = `
-
-      <div class="card-id">
-        ${escapeHTML(card.card_id)}
-      </div>
-
-
-      <div class="card-name">
-        ${escapeHTML(card.name)}
-      </div>
-
-
-      <div class="card-info">
-
-        <span
-          class="card-tag rarity-${getRarityTagClass(card.rarity)}"
-        >
-          ${escapeHTML(card.rarity)}
-        </span>
-
-
-        ${
-          isParallel
-            ? `
-              <span class="card-tag parallel">
-                パラレル
-              </span>
-            `
-            : ""
-        }
-
-
-        ${
-          typeClass
-            ? `
-              <span class="card-tag ${typeClass}">
-                ${escapeHTML(card.type)}
-              </span>
-            `
-            : ""
-        }
-
-
-        <span class="card-tag">
-          ${escapeHTML(card.category)}
-        </span>
-
-
-        ${
-          appeal
-            ? `
-              <span class="card-tag appeal">
-                ${escapeHTML(appeal)}
-              </span>
-            `
-            : ""
-        }
-
-      </div>
-
-
-      <div class="card-brand">
-        ${escapeHTML(card.brand)}
-      </div>
-
-    `;
-
-
-    cardList.appendChild(element);
-
-  });
-
+  margin-top: 5px;
 }
 
+.card-tag {
+  display: inline-flex;
 
-/* =========================
-   レアリティ → CSS
-========================= */
+  align-items: center;
 
-function getRarityClass(rarity) {
+  min-height: 20px;
 
-  if (
-    rarity === "PR" ||
-    rarity === "PR★"
-  ) {
+  padding: 3px 7px;
 
-    return "rarity-pr";
+  border-radius: 6px;
 
-  }
+  background: #eeeeef;
 
+  color: #666;
 
-  if (
-    rarity === "ER" ||
-    rarity === "ER★"
-  ) {
-
-    return "rarity-er";
-
-  }
-
-
-  if (rarity === "R") {
-
-    return "rarity-r";
-
-  }
-
-
-  return "rarity-n";
-
+  font-size: 10px;
+  font-weight: 700;
 }
 
 
@@ -593,135 +597,210 @@ function getRarityClass(rarity) {
    レアリティタグ
 ========================= */
 
-function getRarityTagClass(rarity) {
-
-  if (
-    rarity === "PR" ||
-    rarity === "PR★"
-  ) {
-
-    return "pr";
-
-  }
-
-
-  if (
-    rarity === "ER" ||
-    rarity === "ER★"
-  ) {
-
-    return "er";
-
-  }
-
-
-  if (rarity === "R") {
-
-    return "r";
-
-  }
-
-
-  return "n";
-
+.card-tag.rarity-n {
+  background: #eeeeee;
+  color: #777;
 }
 
-
-/* =========================
-   タイプ → CSS
-========================= */
-
-function getTypeClass(type) {
-
-  switch (type) {
-
-    case "キュート":
-      return "type-cute";
-
-    case "クール":
-      return "type-cool";
-
-    case "セクシー":
-      return "type-sexy";
-
-    case "ポップ":
-      return "type-pop";
-
-    default:
-      return "";
-
-  }
-
-}
-
-
-/* =========================
-   名前検索
-========================= */
-
-nameSearch.addEventListener(
-  "input",
-  () => {
-
-    displayCards();
-
-  }
-);
-
-
-/* =========================
-   重複を除いて取得
-========================= */
-
-function getUniqueValues(
-  cards,
-  key
-) {
-
-  return [
-    ...new Set(
-
-      cards
-        .map(card => card[key])
-        .filter(Boolean)
-
-    )
-  ];
-
-}
-
-
-/* =========================
-   HTMLエスケープ
-========================= */
-
-function escapeHTML(value) {
-
-  return String(value ?? "")
-
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
+.card-tag.rarity-r {
+  background:
+    linear-gradient(
+      135deg,
+      #e2f2ff,
+      #c8e4fb
     );
+
+  color: #4178b3;
+}
+
+.card-tag.rarity-pr {
+  background:
+    linear-gradient(
+      135deg,
+      #fff0c8,
+      #ffdce9
+    );
+
+  color: #b77418;
+}
+
+.card-tag.rarity-er {
+  background:
+    linear-gradient(
+      135deg,
+      #eadcff,
+      #ffdced
+    );
+
+  color: #8b4cae;
+}
+
+
+/* =========================
+   タイプタグ
+========================= */
+
+.card-tag.type-cute {
+  background:
+    linear-gradient(
+      135deg,
+      #ffe2ec,
+      #ffc3d8
+    );
+
+  color: #cd5583;
+}
+
+.card-tag.type-cool {
+  background:
+    linear-gradient(
+      135deg,
+      #e1f1ff,
+      #c5def8
+    );
+
+  color: #467db6;
+}
+
+.card-tag.type-sexy {
+  background:
+    linear-gradient(
+      135deg,
+      #f0e1fa,
+      #dec3ef
+    );
+
+  color: #9052af;
+}
+
+.card-tag.type-pop {
+  background:
+    linear-gradient(
+      135deg,
+      #fff0d1,
+      #ffdaa0
+    );
+
+  color: #b8751d;
+}
+
+
+/* =========================
+   パラレル
+========================= */
+
+.card-tag.parallel {
+  background:
+    linear-gradient(
+      135deg,
+      #f2e5ff,
+      #ffdff0
+    );
+
+  color: #8b50aa;
+}
+
+
+/* =========================
+   AP
+========================= */
+
+.card-tag.appeal {
+  background:
+    linear-gradient(
+      135deg,
+      #fff6cf,
+      #ffe4a0
+    );
+
+  color: #a87518;
+}
+
+
+/* =========================
+   ブランド
+========================= */
+
+.card-brand {
+  grid-column: 2;
+  grid-row: 3;
+
+  margin-top: 5px;
+
+  color: #888;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   0件
+========================= */
+
+.no-results {
+  padding: 30px 10px;
+
+  color: #999;
+
+  text-align: center;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   スマホ
+========================= */
+
+@media screen and (max-width: 600px) {
+
+  main {
+    padding:
+      12px
+      11px
+      40px;
+  }
+
+  header {
+    padding: 15px;
+  }
+
+  header h1 {
+    font-size: 18px;
+  }
+
+  .button-list {
+    gap: 6px;
+  }
+
+  .filter-button {
+    min-height: 34px;
+
+    padding:
+      5px
+      10px;
+
+    font-size: 11px;
+  }
+
+  .card {
+    grid-template-columns:
+      48px
+      minmax(0, 1fr);
+
+    column-gap: 9px;
+
+    padding: 10px;
+  }
+
+  .card-id {
+    width: 44px;
+    height: 44px;
+  }
+
+  .card-name {
+    font-size: 13px;
+  }
 
 }
