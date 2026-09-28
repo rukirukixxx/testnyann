@@ -247,7 +247,7 @@ function createButtons(
 
 
 /* =========================
-   選択状態更新
+   選択状態
 ========================= */
 
 function updateButtons() {
@@ -329,16 +329,14 @@ function displayCards() {
 
 
       /*
-        レアリティ
-
-        PRを選択
+        PR
         → PR + PR★
 
-        ERを選択
+        ER
         → ER + ER★
 
         N / R
-        → N / Rのみ
+        → そのまま
       */
 
       const matchesRarity =
@@ -418,33 +416,31 @@ function renderCards(cards) {
 
 
     /*
-      CSS用クラス
+      カード背景
 
-      rarity-n
-      rarity-r
-      rarity-pr
-      rarity-er
-
-      type-cute
-      type-cool
-      type-sexy
-      type-pop
+      rarityではなく
+      typeだけで決定する
     */
-
-    const rarityClass =
-      getRarityClass(card.rarity);
 
     const typeClass =
       getTypeClass(card.type);
 
 
-    element.className =
-      `card ${rarityClass} ${typeClass}`;
+    const rarityClass =
+      getRarityClass(card.rarity);
 
+
+    element.className =
+      `card ${typeClass} ${rarityClass}`;
+
+
+    /* パラレル判定 */
 
     const isParallel =
       card.variant === "parallel";
 
+
+    /* AP */
 
     const appeal =
       card.appeal_point !== undefined &&
@@ -467,10 +463,16 @@ function renderCards(cards) {
 
       <div class="card-info">
 
-        <span class="card-tag rarity-${getRarityTagClass(card.rarity)}">
+        <!-- レアリティ -->
+
+        <span
+          class="card-tag rarity-${getRarityTagClass(card.rarity)}"
+        >
           ${escapeHTML(card.rarity)}
         </span>
 
+
+        <!-- パラレル -->
 
         ${
           isParallel
@@ -483,6 +485,8 @@ function renderCards(cards) {
         }
 
 
+        <!-- タイプ -->
+
         ${
           typeClass
             ? `
@@ -494,10 +498,14 @@ function renderCards(cards) {
         }
 
 
+        <!-- カテゴリ -->
+
         <span class="card-tag">
           ${escapeHTML(card.category)}
         </span>
 
+
+        <!-- AP -->
 
         ${
           appeal
@@ -629,7 +637,7 @@ nameSearch.addEventListener(
 
 
 /* =========================
-   候補値取得
+   重複削除
 ========================= */
 
 function getUniqueValues(
