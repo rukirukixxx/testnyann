@@ -14,19 +14,32 @@
 
   <link rel="stylesheet" href="sorting.css">
 
+  <!-- 可愛い文字用フォント -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
 </head>
 
 
 <body>
 
   <header>
-    <h1>カードを登録</h1>
+
+    <h1>
+      カードを登録
+    </h1>
+
   </header>
 
 
   <main>
 
-    <!-- カード名検索 -->
+
+    <!-- =========================
+         カード名検索
+    ========================== -->
 
     <section class="search-section">
 
@@ -34,28 +47,24 @@
         カード名
       </label>
 
-      <div class="search-box">
-
-        <span class="search-icon">
-          🔍
-        </span>
-
-        <input
-          type="search"
-          id="name-search"
-          placeholder="カード名を入力..."
-        >
-
-      </div>
+      <input
+        type="search"
+        id="name-search"
+        placeholder="カード名を入力..."
+      >
 
     </section>
 
 
-    <!-- 弾 -->
+    <!-- =========================
+         弾
+    ========================== -->
 
     <section class="filter-section">
 
-      <h2>弾</h2>
+      <h2>
+        弾
+      </h2>
 
       <div
         class="button-list"
@@ -65,11 +74,15 @@
     </section>
 
 
-    <!-- レアリティ -->
+    <!-- =========================
+         レアリティ
+    ========================== -->
 
     <section class="filter-section">
 
-      <h2>レアリティ</h2>
+      <h2>
+        レアリティ
+      </h2>
 
       <div
         class="button-list rarity-buttons"
@@ -79,11 +92,15 @@
     </section>
 
 
-    <!-- タイプ -->
+    <!-- =========================
+         タイプ
+    ========================== -->
 
     <section class="filter-section">
 
-      <h2>タイプ</h2>
+      <h2>
+        タイプ
+      </h2>
 
       <div
         class="button-list"
@@ -93,11 +110,15 @@
     </section>
 
 
-    <!-- カテゴリ -->
+    <!-- =========================
+         カテゴリ
+    ========================== -->
 
     <section class="filter-section">
 
-      <h2>カテゴリ</h2>
+      <h2>
+        カテゴリ
+      </h2>
 
       <div
         class="button-list"
@@ -107,21 +128,17 @@
     </section>
 
 
-    <!-- 候補カード -->
+    <!-- =========================
+         候補カード
+    ========================== -->
 
     <section class="result-section">
 
       <div class="result-header">
 
-        <div>
-
-          <h2>候補カード</h2>
-
-          <p>
-            条件に合うカード
-          </p>
-
-        </div>
+        <h2>
+          候補カード
+        </h2>
 
         <span id="result-count">
           0枚
@@ -137,93 +154,8 @@
 
     </section>
 
+
   </main>
-
-
-  <!-- 下部ナビ -->
-
-  <nav class="bottom-nav">
-
-    <a
-      href="../"
-      class="bottom-nav-item"
-    >
-
-      <span class="nav-icon">
-        ▣
-      </span>
-
-      <span class="nav-label">
-        カードリスト
-      </span>
-
-    </a>
-
-
-    <a
-      href="../trade/"
-      class="bottom-nav-item"
-    >
-
-      <span class="nav-icon">
-        ⇄
-      </span>
-
-      <span class="nav-label">
-        トレード
-      </span>
-
-    </a>
-
-
-    <a
-      href="./"
-      class="bottom-nav-item add-button active"
-    >
-
-      <span class="add-circle">
-        ＋
-      </span>
-
-      <span class="nav-label">
-        追加
-      </span>
-
-    </a>
-
-
-    <a
-      href="../history/"
-      class="bottom-nav-item"
-    >
-
-      <span class="nav-icon">
-        ◷
-      </span>
-
-      <span class="nav-label">
-        履歴
-      </span>
-
-    </a>
-
-
-    <a
-      href="../settings/"
-      class="bottom-nav-item"
-    >
-
-      <span class="nav-icon">
-        ⚙
-      </span>
-
-      <span class="nav-label">
-        設定
-      </span>
-
-    </a>
-
-  </nav>
 
 
   <script src="sorting.js"></script>
