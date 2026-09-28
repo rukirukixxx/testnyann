@@ -2,12 +2,15 @@
   box-sizing: border-box;
 }
 
+
 html,
 body {
   margin: 0;
   padding: 0;
+
   width: 100%;
 }
+
 
 body {
   font-family:
@@ -17,7 +20,8 @@ body {
     "Noto Sans JP",
     sans-serif;
 
-  background: #f8f6f8;
+  background: #f6f6f8;
+
   color: #333;
 
   overflow-x: hidden;
@@ -30,25 +34,24 @@ body {
 
 header {
   position: sticky;
+
   top: 0;
+
   z-index: 10;
 
-  background: rgba(255, 255, 255, 0.96);
+  background: white;
 
   padding: 16px;
 
-  border-bottom: 1px solid #e8e3e7;
-
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid #e5e5e5;
 }
+
 
 header h1 {
   margin: 0;
 
-  color: #555;
-
   font-size: 20px;
+
   font-weight: 700;
 }
 
@@ -59,6 +62,7 @@ header h1 {
 
 main {
   width: 100%;
+
   max-width: 650px;
 
   margin: 0 auto;
@@ -75,41 +79,39 @@ main {
   margin-bottom: 20px;
 }
 
+
 .search-section label {
   display: block;
 
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 
-  color: #666;
+  font-size: 14px;
 
-  font-size: 13px;
   font-weight: 700;
 }
 
+
 #name-search {
   width: 100%;
-  height: 44px;
+
+  height: 46px;
 
   padding: 0 14px;
 
   border: 1px solid #ddd;
 
-  border-radius: 11px;
+  border-radius: 10px;
 
   background: white;
 
-  color: #333;
-
-  font-size: 14px;
+  font-size: 15px;
 
   outline: none;
-
-  box-shadow:
-    0 2px 7px rgba(0, 0, 0, 0.04);
 }
 
+
 #name-search:focus {
-  border-color: #bbb;
+  border-color: #aaa;
 }
 
 
@@ -118,15 +120,15 @@ main {
 ========================= */
 
 .filter-section {
-  margin-bottom: 19px;
+  margin-bottom: 20px;
 }
 
+
 .filter-section h2 {
-  margin: 0 0 9px;
+  margin: 0 0 10px;
 
-  color: #555;
+  font-size: 15px;
 
-  font-size: 14px;
   font-weight: 700;
 }
 
@@ -143,8 +145,9 @@ main {
   gap: 7px;
 }
 
+
 .filter-button {
-  min-height: 35px;
+  min-height: 36px;
 
   padding: 6px 12px;
 
@@ -154,9 +157,10 @@ main {
 
   background: white;
 
-  color: #555;
+  color: #444;
 
-  font-size: 12px;
+  font-size: 13px;
+
   font-weight: 600;
 
   cursor: pointer;
@@ -168,47 +172,54 @@ main {
     transform 0.1s;
 }
 
+
 .filter-button:active {
-  transform: scale(0.96);
+  transform: scale(0.97);
 }
 
-.filter-button.active {
-  background: #444;
 
-  border-color: #444;
+.filter-button.active {
+  background: #333;
+
+  border-color: #333;
 
   color: white;
 }
 
 
 /* =========================
-   レアリティ選択ボタン
+   レアリティ選択
 ========================= */
 
 .rarity-buttons
 .filter-button:nth-child(1) {
-  color: #777;
+  color: #666;
 }
+
 
 .rarity-buttons
 .filter-button:nth-child(2) {
-  color: #3f78b5;
+  color: #3975b4;
 }
+
 
 .rarity-buttons
 .filter-button:nth-child(3) {
-  color: #c7831e;
+  color: #c47d13;
 }
+
 
 .rarity-buttons
 .filter-button:nth-child(4) {
-  color: #9150b2;
+  color: #914cb2;
 }
+
 
 .rarity-buttons
 .filter-button.active {
   color: white;
 }
+
 
 .rarity-buttons
 .filter-button:nth-child(1).active {
@@ -216,81 +227,79 @@ main {
   border-color: #888;
 }
 
+
 .rarity-buttons
 .filter-button:nth-child(2).active {
-  background: #5c94ce;
-  border-color: #5c94ce;
+  background: #6094ca;
+  border-color: #6094ca;
 }
+
 
 .rarity-buttons
 .filter-button:nth-child(3).active {
-  background: #d39a42;
-  border-color: #d39a42;
+  background: #d49a40;
+  border-color: #d49a40;
 }
+
 
 .rarity-buttons
 .filter-button:nth-child(4).active {
-  background: #a264c0;
-  border-color: #a264c0;
+  background: #a262bd;
+  border-color: #a262bd;
 }
 
 
 /* =========================
-   タイプ選択ボタン
+   タイプ選択
 ========================= */
 
 #type-buttons
 .filter-button[data-value="キュート"] {
-  color: #d65a89;
+  color: #d35a88;
 }
+
 
 #type-buttons
 .filter-button[data-value="クール"] {
-  color: #477eb9;
+  color: #447cb7;
 }
+
 
 #type-buttons
 .filter-button[data-value="セクシー"] {
-  color: #9556b4;
+  color: #9655b4;
 }
+
 
 #type-buttons
 .filter-button[data-value="ポップ"] {
-  color: #c27b1e;
+  color: #c47b1b;
 }
 
-
-/* キュート */
 
 #type-buttons
 .filter-button[data-value="キュート"].active {
-  background: #e879a4;
-  border-color: #e879a4;
+  background: #e678a2;
+  border-color: #e678a2;
   color: white;
 }
 
-
-/* クール */
 
 #type-buttons
 .filter-button[data-value="クール"].active {
-  background: #629bd1;
-  border-color: #629bd1;
+  background: #6097cd;
+  border-color: #6097cd;
   color: white;
 }
 
-
-/* セクシー */
 
 #type-buttons
 .filter-button[data-value="セクシー"].active {
-  background: #a669c1;
-  border-color: #a669c1;
+  background: #a568c0;
+  border-color: #a568c0;
   color: white;
 }
 
-
-/* ポップ */
 
 #type-buttons
 .filter-button[data-value="ポップ"].active {
@@ -307,33 +316,37 @@ main {
 .result-section {
   margin-top: 28px;
 
-  padding-top: 18px;
+  padding-top: 20px;
 
   border-top: 1px solid #ddd;
 }
+
 
 .result-header {
   display: flex;
 
   align-items: center;
+
   justify-content: space-between;
 
-  margin-bottom: 11px;
+  margin-bottom: 12px;
 }
+
 
 .result-header h2 {
   margin: 0;
 
-  color: #555;
+  font-size: 17px;
 
-  font-size: 16px;
   font-weight: 700;
 }
 
-#result-count {
-  color: #888;
 
-  font-size: 12px;
+#result-count {
+  color: #777;
+
+  font-size: 13px;
+
   font-weight: 600;
 }
 
@@ -347,7 +360,7 @@ main {
 
   flex-direction: column;
 
-  gap: 9px;
+  gap: 10px;
 }
 
 
@@ -389,18 +402,8 @@ main {
 
 
 /* =========================
-   タイプ別カード背景
+   タイプ別背景
 ========================= */
-
-/*
-  重要
-
-  カード背景はレアリティではなく
-  タイプだけで決まります。
-
-  左側は必ず白。
-  右側に向かって色が濃くなります。
-*/
 
 
 /* キュート */
@@ -478,14 +481,17 @@ main {
 
 .card-id {
   grid-column: 1;
+
   grid-row: 1 / 4;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   width: 48px;
+
   height: 48px;
 
   margin-top: 1px;
@@ -493,20 +499,25 @@ main {
   border-radius: 10px;
 
   font-size: 10px;
+
   font-weight: 800;
 
   box-shadow:
     inset 0 0 0 1px
     rgba(255, 255, 255, 0.7);
+
+  background:
+    linear-gradient(
+      135deg,
+      #eeeeee,
+      #dddddd
+    );
+
+  color: #777;
 }
 
 
-/* =========================
-   ID タイプカラー
-========================= */
-
-
-/* キュート */
+/* ID：キュート */
 
 .card.type-cute .card-id {
   background:
@@ -520,7 +531,7 @@ main {
 }
 
 
-/* クール */
+/* ID：クール */
 
 .card.type-cool .card-id {
   background:
@@ -534,7 +545,7 @@ main {
 }
 
 
-/* セクシー */
+/* ID：セクシー */
 
 .card.type-sexy .card-id {
   background:
@@ -548,7 +559,7 @@ main {
 }
 
 
-/* ポップ */
+/* ID：ポップ */
 
 .card.type-pop .card-id {
   background:
@@ -562,33 +573,21 @@ main {
 }
 
 
-/* タイプ不明 */
-
-.card-id {
-  background:
-    linear-gradient(
-      135deg,
-      #eeeeee,
-      #dddddd
-    );
-
-  color: #777;
-}
-
-
 /* =========================
    カード名
 ========================= */
 
 .card-name {
   grid-column: 2;
+
   grid-row: 1;
 
   min-width: 0;
 
-  color: #444;
+  color: #66566b;
 
   font-size: 14px;
+
   font-weight: 700;
 
   line-height: 1.4;
@@ -598,11 +597,12 @@ main {
 
 
 /* =========================
-   情報
+   カード情報
 ========================= */
 
 .card-info {
   grid-column: 2;
+
   grid-row: 2;
 
   display: flex;
@@ -618,7 +618,7 @@ main {
 
 
 /* =========================
-   タグ共通
+   タグ
 ========================= */
 
 .card-tag {
@@ -634,10 +634,11 @@ main {
 
   background: #eeeeef;
 
-  color: #666;
+  color: #66566b;
 
   font-size: 10px;
-  font-weight: 700;
+
+  font-weight: 600;
 }
 
 
@@ -647,8 +648,10 @@ main {
 
 .card-tag.rarity-n {
   background: #eeeeee;
-  color: #777;
+
+  color: #66566b;
 }
+
 
 .card-tag.rarity-r {
   background:
@@ -658,8 +661,9 @@ main {
       #c8e4fb
     );
 
-  color: #4178b3;
+  color: #66566b;
 }
+
 
 .card-tag.rarity-pr {
   background:
@@ -669,8 +673,9 @@ main {
       #ffdce9
     );
 
-  color: #b77418;
+  color: #66566b;
 }
+
 
 .card-tag.rarity-er {
   background:
@@ -680,7 +685,7 @@ main {
       #ffdced
     );
 
-  color: #8b4cae;
+  color: #66566b;
 }
 
 
@@ -688,48 +693,11 @@ main {
    タイプタグ
 ========================= */
 
-.card-tag.type-cute {
-  background:
-    linear-gradient(
-      135deg,
-      #ffe2ec,
-      #ffc3d8
-    );
-
-  color: #cd5583;
-}
-
-.card-tag.type-cool {
-  background:
-    linear-gradient(
-      135deg,
-      #e1f1ff,
-      #c5def8
-    );
-
-  color: #467db6;
-}
-
-.card-tag.type-sexy {
-  background:
-    linear-gradient(
-      135deg,
-      #f0e1fa,
-      #dec3ef
-    );
-
-  color: #9052af;
-}
-
+.card-tag.type-cute,
+.card-tag.type-cool,
+.card-tag.type-sexy,
 .card-tag.type-pop {
-  background:
-    linear-gradient(
-      135deg,
-      #fff0d1,
-      #ffdaa0
-    );
-
-  color: #b8751d;
+  color: #66566b;
 }
 
 
@@ -745,7 +713,7 @@ main {
       #ffdff0
     );
 
-  color: #8b50aa;
+  color: #66566b;
 }
 
 
@@ -761,7 +729,7 @@ main {
       #ffe4a0
     );
 
-  color: #a87518;
+  color: #66566b;
 }
 
 
@@ -771,13 +739,15 @@ main {
 
 .card-brand {
   grid-column: 2;
+
   grid-row: 3;
 
   margin-top: 5px;
 
-  color: #888;
+  color: #7d7181;
 
   font-size: 10px;
+
   font-weight: 600;
 }
 
@@ -797,6 +767,107 @@ main {
 }
 
 
+/* ==================================================
+   ここから文字だけ可愛くする部分
+   ================================================== */
+
+
+/* 「カードを登録」 */
+
+header h1 {
+  font-family:
+    "M PLUS Rounded 1c",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #66566b;
+
+  font-weight: 800;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* 候補カード全体 */
+
+.card {
+  font-family:
+    "M PLUS Rounded 1c",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+
+/* カードID */
+
+.card-id {
+  font-family:
+    "M PLUS Rounded 1c",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  font-weight: 700;
+}
+
+
+/* カード名 */
+
+.card-name {
+  font-family:
+    "M PLUS Rounded 1c",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #66566b;
+
+  font-weight: 700;
+
+  letter-spacing: 0.02em;
+}
+
+
+/* カード情報 */
+
+.card-tag {
+  font-family:
+    "M PLUS Rounded 1c",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #66566b;
+
+  font-weight: 600;
+
+  letter-spacing: 0.01em;
+}
+
+
+/* ブランド */
+
+.card-brand {
+  font-family:
+    "M PLUS Rounded 1c",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #7d7181;
+
+  font-weight: 600;
+}
+
+
 /* =========================
    スマホ
 ========================= */
@@ -805,32 +876,35 @@ main {
 
   main {
     padding:
+      14px
       12px
-      11px
       40px;
   }
 
+
   header {
-    padding: 15px;
+    padding: 16px;
   }
+
 
   header h1 {
-    font-size: 18px;
+    font-size: 19px;
   }
+
 
   .button-list {
-    gap: 6px;
+    gap: 7px;
   }
+
 
   .filter-button {
-    min-height: 34px;
+    min-height: 36px;
 
     padding:
-      5px
-      10px;
-
-    font-size: 11px;
+      6px
+      11px;
   }
+
 
   .card {
     grid-template-columns:
@@ -842,10 +916,13 @@ main {
     padding: 10px;
   }
 
+
   .card-id {
     width: 44px;
+
     height: 44px;
   }
+
 
   .card-name {
     font-size: 13px;
