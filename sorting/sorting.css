@@ -1,931 +1,1057 @@
-* {
-  box-sizing: border-box;
-}
+/* ==================================================
+基本設定
+================================================== */
 
+{
+box-sizing: border-box;
+}
 
 html,
 body {
-  margin: 0;
-  padding: 0;
+margin: 0;
+padding: 0;
 
-  width: 100%;
+width: 100%;
 }
-
 
 body {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Noto Sans JP",
-    sans-serif;
+font-family:
+"M PLUS Rounded 1c",
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+"Noto Sans JP",
+sans-serif;
 
-  background: #f6f6f8;
+background: #f6f6f8;
 
-  color: #333;
+color: #333;
 
-  overflow-x: hidden;
+overflow-x: hidden;
+
+padding-bottom: 90px;
 }
 
+/* ==================================================
+ヘッダー
+================================================== */
 
-/* =========================
-   ヘッダー
-========================= */
+.site-header {
+position: sticky;
 
-header {
-  position: sticky;
+top: 0;
 
-  top: 0;
+z-index: 100;
 
-  z-index: 10;
+background: rgba(255, 255, 255, 0.96);
 
-  background: white;
+padding: 16px;
 
-  padding: 16px;
+border-bottom: 1px solid #e5e5e5;
 
-  border-bottom: 1px solid #e5e5e5;
+backdrop-filter: blur(8px);
 }
 
+.site-header h1 {
+margin: 0;
 
-header h1 {
-  margin: 0;
+color: #66566b;
 
-  font-size: 20px;
+font-size: 20px;
 
-  font-weight: 700;
+font-weight: 800;
+
+letter-spacing: 0.04em;
 }
 
-
-/* =========================
-   メイン
-========================= */
+/* ==================================================
+メイン
+================================================== */
 
 main {
-  width: 100%;
+width: 100%;
 
-  max-width: 650px;
+max-width: 650px;
 
-  margin: 0 auto;
+margin: 0 auto;
 
-  padding: 14px 14px 40px;
+padding: 14px 14px 40px;
 }
 
-
-/* =========================
-   検索
-========================= */
+/* ==================================================
+検索
+================================================== */
 
 .search-section {
-  margin-bottom: 20px;
+margin-bottom: 20px;
 }
-
 
 .search-section label {
-  display: block;
+display: block;
 
-  margin-bottom: 8px;
+margin-bottom: 8px;
 
-  font-size: 14px;
+color: #66566b;
 
-  font-weight: 700;
+font-size: 14px;
+
+font-weight: 700;
 }
-
 
 #name-search {
-  width: 100%;
+display: block;
 
-  height: 46px;
+width: 100%;
 
-  padding: 0 14px;
+height: 46px;
 
-  border: 1px solid #ddd;
+padding: 0 14px;
 
-  border-radius: 10px;
+border: 1px solid #ddd;
 
-  background: white;
+border-radius: 10px;
 
-  font-size: 15px;
+outline: none;
 
-  outline: none;
+background: white;
+
+color: #333;
+
+font-family: inherit;
+
+font-size: 15px;
+
+transition:
+border-color 0.15s,
+box-shadow 0.15s;
 }
 
+#name-search::placeholder {
+color: #aaa;
+}
 
 #name-search:focus {
-  border-color: #aaa;
+border-color: #b79fbd;
+
+box-shadow:
+0 0 0 3px rgba(183, 159, 189, 0.15);
 }
 
-
-/* =========================
-   フィルター
-========================= */
+/* ==================================================
+フィルター
+================================================== */
 
 .filter-section {
-  margin-bottom: 20px;
+margin-bottom: 20px;
 }
-
 
 .filter-section h2 {
-  margin: 0 0 10px;
+margin: 0 0 10px;
 
-  font-size: 15px;
+color: #66566b;
 
-  font-weight: 700;
+font-size: 15px;
+
+font-weight: 700;
+
+letter-spacing: 0.02em;
 }
 
-
-/* =========================
-   ボタン
-========================= */
+/* ==================================================
+ボタン一覧
+================================================== */
 
 .button-list {
-  display: flex;
+display: flex;
 
-  flex-wrap: wrap;
+flex-wrap: wrap;
 
-  gap: 7px;
+gap: 7px;
 }
 
+/* ==================================================
+フィルターボタン
+================================================== */
 
 .filter-button {
-  min-height: 36px;
+min-height: 36px;
 
-  padding: 6px 12px;
+padding: 6px 12px;
 
-  border: 1px solid #ddd;
+border: 1px solid #ddd;
 
-  border-radius: 9px;
+border-radius: 9px;
 
-  background: white;
+outline: none;
 
-  color: #444;
+background: white;
 
-  font-size: 13px;
+color: #444;
 
-  font-weight: 600;
+font-family: inherit;
 
-  cursor: pointer;
+font-size: 13px;
 
-  transition:
-    background 0.15s,
-    color 0.15s,
-    border-color 0.15s,
-    transform 0.1s;
+font-weight: 600;
+
+cursor: pointer;
+
+transition:
+background 0.15s,
+color 0.15s,
+border-color 0.15s,
+transform 0.1s,
+box-shadow 0.15s;
 }
 
+.filter-button:hover {
+border-color: #cfcfcf;
+
+box-shadow:
+0 2px 5px rgba(0, 0, 0, 0.05);
+}
 
 .filter-button:active {
-  transform: scale(0.97);
+transform: scale(0.97);
 }
-
 
 .filter-button.active {
-  background: #333;
+background: #333;
 
-  border-color: #333;
+border-color: #333;
 
-  color: white;
+color: white;
 }
 
+/* ==================================================
+レアリティ選択
+================================================== */
 
-/* =========================
-   レアリティ選択
-========================= */
-
-.rarity-buttons
-.filter-button:nth-child(1) {
-  color: #666;
+.rarity-buttons .filter-button:nth-child(1) {
+color: #666;
 }
 
-
-.rarity-buttons
-.filter-button:nth-child(2) {
-  color: #3975b4;
+.rarity-buttons .filter-button:nth-child(2) {
+color: #3975b4;
 }
 
-
-.rarity-buttons
-.filter-button:nth-child(3) {
-  color: #c47d13;
+.rarity-buttons .filter-button:nth-child(3) {
+color: #c47d13;
 }
 
-
-.rarity-buttons
-.filter-button:nth-child(4) {
-  color: #914cb2;
+.rarity-buttons .filter-button:nth-child(4) {
+color: #914cb2;
 }
 
-
-.rarity-buttons
-.filter-button.active {
-  color: white;
+.rarity-buttons .filter-button.active {
+color: white;
 }
 
+.rarity-buttons .filter-button:nth-child(1).active {
+background: #888;
 
-.rarity-buttons
-.filter-button:nth-child(1).active {
-  background: #888;
-  border-color: #888;
+border-color: #888;
 }
 
+.rarity-buttons .filter-button:nth-child(2).active {
+background: #6094ca;
 
-.rarity-buttons
-.filter-button:nth-child(2).active {
-  background: #6094ca;
-  border-color: #6094ca;
+border-color: #6094ca;
 }
 
+.rarity-buttons .filter-button:nth-child(3).active {
+background: #d49a40;
 
-.rarity-buttons
-.filter-button:nth-child(3).active {
-  background: #d49a40;
-  border-color: #d49a40;
+border-color: #d49a40;
 }
 
+.rarity-buttons .filter-button:nth-child(4).active {
+background: #a262bd;
 
-.rarity-buttons
-.filter-button:nth-child(4).active {
-  background: #a262bd;
-  border-color: #a262bd;
+border-color: #a262bd;
 }
 
+/* ==================================================
+タイプ選択
+================================================== */
 
-/* =========================
-   タイプ選択
-========================= */
-
-#type-buttons
-.filter-button[data-value="キュート"] {
-  color: #d35a88;
+#type-buttons .filter-button[data-value="キュート"] {
+color: #d35a88;
 }
 
-
-#type-buttons
-.filter-button[data-value="クール"] {
-  color: #447cb7;
+#type-buttons .filter-button[data-value="クール"] {
+color: #447cb7;
 }
 
-
-#type-buttons
-.filter-button[data-value="セクシー"] {
-  color: #9655b4;
+#type-buttons .filter-button[data-value="セクシー"] {
+color: #9655b4;
 }
 
-
-#type-buttons
-.filter-button[data-value="ポップ"] {
-  color: #c47b1b;
+#type-buttons .filter-button[data-value="ポップ"] {
+color: #c47b1b;
 }
 
+#type-buttons .filter-button[data-value="キュート"].active {
+background: #e678a2;
 
-#type-buttons
-.filter-button[data-value="キュート"].active {
-  background: #e678a2;
-  border-color: #e678a2;
-  color: white;
+border-color: #e678a2;
+
+color: white;
 }
 
+#type-buttons .filter-button[data-value="クール"].active {
+background: #6097cd;
 
-#type-buttons
-.filter-button[data-value="クール"].active {
-  background: #6097cd;
-  border-color: #6097cd;
-  color: white;
+border-color: #6097cd;
+
+color: white;
 }
 
+#type-buttons .filter-button[data-value="セクシー"].active {
+background: #a568c0;
 
-#type-buttons
-.filter-button[data-value="セクシー"].active {
-  background: #a568c0;
-  border-color: #a568c0;
-  color: white;
+border-color: #a568c0;
+
+color: white;
 }
 
+#type-buttons .filter-button[data-value="ポップ"].active {
+background: #d99a42;
 
-#type-buttons
-.filter-button[data-value="ポップ"].active {
-  background: #d99a42;
-  border-color: #d99a42;
-  color: white;
+border-color: #d99a42;
+
+color: white;
 }
 
-
-/* =========================
-   結果
-========================= */
+/* ==================================================
+結果
+================================================== */
 
 .result-section {
-  margin-top: 28px;
+margin-top: 28px;
 
-  padding-top: 20px;
+padding-top: 20px;
 
-  border-top: 1px solid #ddd;
+border-top: 1px solid #ddd;
 }
-
 
 .result-header {
-  display: flex;
+display: flex;
 
-  align-items: center;
+align-items: center;
 
-  justify-content: space-between;
+justify-content: space-between;
 
-  margin-bottom: 12px;
+margin-bottom: 12px;
 }
-
 
 .result-header h2 {
-  margin: 0;
+margin: 0;
 
-  font-size: 17px;
+color: #66566b;
 
-  font-weight: 700;
+font-size: 17px;
+
+font-weight: 700;
 }
-
 
 #result-count {
-  color: #777;
+color: #999;
 
-  font-size: 13px;
+font-size: 13px;
 
-  font-weight: 600;
+font-weight: 600;
 }
 
-
-/* =========================
-   カード一覧
-========================= */
+/* ==================================================
+カード一覧
+================================================== */
 
 .card-list {
-  display: flex;
+display: flex;
 
-  flex-direction: column;
+flex-direction: column;
 
-  gap: 10px;
+gap: 10px;
 }
 
-
-/* =========================
-   カード本体
-========================= */
+/* ==================================================
+カード本体
+================================================== */
 
 .card {
-  position: relative;
+position: relative;
 
-  display: grid;
+display: grid;
 
-  grid-template-columns:
-    52px
-    minmax(0, 1fr);
+grid-template-columns:
+52px
+minmax(0, 1fr);
 
-  grid-template-rows:
-    auto
-    auto
-    auto;
+grid-template-rows:
+auto
+auto
+auto;
 
-  column-gap: 10px;
+column-gap: 10px;
 
-  width: 100%;
+width: 100%;
 
-  padding: 12px;
+padding: 12px;
 
-  border: 1px solid rgba(255, 255, 255, 0.9);
+border: 1px solid rgba(255, 255, 255, 0.9);
 
-  border-radius: 13px;
+border-radius: 13px;
 
-  overflow: hidden;
+overflow: hidden;
 
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.07);
+box-shadow:
+0 2px 8px rgba(0, 0, 0, 0.07);
 
-  background: white;
+background: white;
+
+transition:
+transform 0.15s,
+box-shadow 0.15s;
 }
 
+.card:hover {
+transform: translateY(-1px);
 
-/* =========================
-   タイプ別背景
-========================= */
+box-shadow:
+0 4px 12px rgba(0, 0, 0, 0.09);
+}
 
-
-/* キュート */
+/* ==================================================
+タイプ別背景
+================================================== */
 
 .card.type-cute {
-  background:
-    linear-gradient(
-      110deg,
-      #ffffff 0%,
-      #ffffff 28%,
-      #fff6fa 52%,
-      #ffe1ec 100%
-    );
+background:
+linear-gradient(
+110deg,
+#ffffff 0%,
+#ffffff 28%,
+#fff6fa 52%,
+#ffe1ec 100%
+);
 }
-
-
-/* クール */
 
 .card.type-cool {
-  background:
-    linear-gradient(
-      110deg,
-      #ffffff 0%,
-      #ffffff 28%,
-      #f4f9ff 52%,
-      #dceeff 100%
-    );
+background:
+linear-gradient(
+110deg,
+#ffffff 0%,
+#ffffff 28%,
+#f4f9ff 52%,
+#dceeff 100%
+);
 }
-
-
-/* セクシー */
 
 .card.type-sexy {
-  background:
-    linear-gradient(
-      110deg,
-      #ffffff 0%,
-      #ffffff 28%,
-      #f9f3fc 52%,
-      #eadcf6 100%
-    );
+background:
+linear-gradient(
+110deg,
+#ffffff 0%,
+#ffffff 28%,
+#f9f3fc 52%,
+#eadcf6 100%
+);
 }
-
-
-/* ポップ */
 
 .card.type-pop {
-  background:
-    linear-gradient(
-      110deg,
-      #ffffff 0%,
-      #ffffff 28%,
-      #fff9ee 52%,
-      #ffe4b7 100%
-    );
+background:
+linear-gradient(
+110deg,
+#ffffff 0%,
+#ffffff 28%,
+#fff9ee 52%,
+#ffe4b7 100%
+);
 }
-
-
-/* タイプ不明 */
 
 .card:not(.type-cute):not(.type-cool):not(.type-sexy):not(.type-pop) {
-  background:
-    linear-gradient(
-      110deg,
-      #ffffff 0%,
-      #ffffff 30%,
-      #f5f5f5 100%
-    );
+background:
+linear-gradient(
+110deg,
+#ffffff 0%,
+#ffffff 30%,
+#f5f5f5 100%
+);
 }
 
-
-/* =========================
-   ID
-========================= */
+/* ==================================================
+カードID
+================================================== */
 
 .card-id {
-  grid-column: 1;
+grid-column: 1;
 
-  grid-row: 1 / 4;
+grid-row: 1 / 4;
 
-  display: flex;
+display: flex;
 
-  align-items: center;
+align-items: center;
 
-  justify-content: center;
+justify-content: center;
 
-  width: 48px;
+width: 48px;
 
-  height: 48px;
+height: 48px;
 
-  margin-top: 1px;
+margin-top: 1px;
 
-  border-radius: 10px;
+border-radius: 10px;
 
-  font-size: 10px;
+font-size: 10px;
 
-  font-weight: 800;
+font-weight: 800;
 
-  box-shadow:
-    inset 0 0 0 1px
-    rgba(255, 255, 255, 0.7);
+box-shadow:
+inset 0 0 0 1px
+rgba(255, 255, 255, 0.7);
 
-  background:
-    linear-gradient(
-      135deg,
-      #eeeeee,
-      #dddddd
-    );
+background:
+linear-gradient(
+135deg,
+#eeeeee,
+#dddddd
+);
 
-  color: #777;
+color: #777;
 }
 
-
-/* ID：キュート */
+/* ==================================================
+タイプ別ID
+================================================== */
 
 .card.type-cute .card-id {
-  background:
-    linear-gradient(
-      135deg,
-      #ffd9e7,
-      #ff9fc4
-    );
+background:
+linear-gradient(
+135deg,
+#ffd9e7,
+#ff9fc4
+);
 
-  color: #c84e7c;
+color: #c84e7c;
 }
-
-
-/* ID：クール */
 
 .card.type-cool .card-id {
-  background:
-    linear-gradient(
-      135deg,
-      #dceeff,
-      #91c4f2
-    );
+background:
+linear-gradient(
+135deg,
+#dceeff,
+#91c4f2
+);
 
-  color: #3f73ad;
+color: #3f73ad;
 }
-
-
-/* ID：セクシー */
 
 .card.type-sexy .card-id {
-  background:
-    linear-gradient(
-      135deg,
-      #f0ddff,
-      #d09ae8
-    );
+background:
+linear-gradient(
+135deg,
+#f0ddff,
+#d09ae8
+);
 
-  color: #824ba5;
+color: #824ba5;
 }
-
-
-/* ID：ポップ */
 
 .card.type-pop .card-id {
-  background:
-    linear-gradient(
-      135deg,
-      #fff0ce,
-      #ffc96d
-    );
+background:
+linear-gradient(
+135deg,
+#fff0ce,
+#ffc96d
+);
 
-  color: #ae6b17;
+color: #ae6b17;
 }
 
-
-/* =========================
-   カード名
-========================= */
+/* ==================================================
+カード名
+================================================== */
 
 .card-name {
-  grid-column: 2;
+grid-column: 2;
 
-  grid-row: 1;
+grid-row: 1;
 
-  min-width: 0;
+min-width: 0;
 
-  color: #66566b;
+color: #66566b;
 
-  font-size: 14px;
+font-size: 14px;
 
-  font-weight: 700;
+font-weight: 700;
 
-  line-height: 1.4;
+line-height: 1.4;
 
-  word-break: break-word;
+letter-spacing: 0.02em;
+
+word-break: break-word;
 }
 
-
-/* =========================
-   カード情報
-========================= */
+/* ==================================================
+カード情報
+================================================== */
 
 .card-info {
-  grid-column: 2;
+grid-column: 2;
 
-  grid-row: 2;
+grid-row: 2;
 
-  display: flex;
+display: flex;
 
-  align-items: center;
+align-items: center;
 
-  flex-wrap: wrap;
+flex-wrap: wrap;
 
-  gap: 5px;
+gap: 5px;
 
-  margin-top: 5px;
+margin-top: 5px;
 }
 
-
-/* =========================
-   タグ
-========================= */
+/* ==================================================
+タグ
+================================================== */
 
 .card-tag {
-  display: inline-flex;
+display: inline-flex;
 
-  align-items: center;
+align-items: center;
 
-  min-height: 20px;
+min-height: 20px;
 
-  padding: 3px 7px;
+padding: 3px 7px;
 
-  border-radius: 6px;
+border-radius: 6px;
 
-  background: #eeeeef;
+background: #eeeeef;
 
-  color: #66566b;
+color: #66566b;
 
-  font-size: 10px;
+font-size: 10px;
 
-  font-weight: 600;
+font-weight: 600;
+
+line-height: 1.2;
+
+letter-spacing: 0.01em;
 }
 
-
-/* =========================
-   レアリティタグ
-========================= */
+/* ==================================================
+レアリティタグ
+================================================== */
 
 .card-tag.rarity-n {
-  background: #eeeeee;
+background: #eeeeee;
 
-  color: #66566b;
+color: #66566b;
 }
-
 
 .card-tag.rarity-r {
-  background:
-    linear-gradient(
-      135deg,
-      #e2f2ff,
-      #c8e4fb
-    );
+background:
+linear-gradient(
+135deg,
+#e2f2ff,
+#c8e4fb
+);
 
-  color: #66566b;
+color: #66566b;
 }
-
 
 .card-tag.rarity-pr {
-  background:
-    linear-gradient(
-      135deg,
-      #fff0c8,
-      #ffdce9
-    );
+background:
+linear-gradient(
+135deg,
+#fff0c8,
+#ffdce9
+);
 
-  color: #66566b;
+color: #66566b;
 }
-
 
 .card-tag.rarity-er {
-  background:
-    linear-gradient(
-      135deg,
-      #eadcff,
-      #ffdced
-    );
+background:
+linear-gradient(
+135deg,
+#eadcff,
+#ffdced
+);
 
-  color: #66566b;
+color: #66566b;
 }
 
-
-/* =========================
-   タイプタグ
-========================= */
+/* ==================================================
+タイプタグ
+================================================== */
 
 .card-tag.type-cute,
 .card-tag.type-cool,
 .card-tag.type-sexy,
 .card-tag.type-pop {
-  color: #66566b;
+color: #66566b;
 }
-
-
-/* =========================
-   パラレル
-========================= */
-
-.card-tag.parallel {
-  background:
-    linear-gradient(
-      135deg,
-      #f2e5ff,
-      #ffdff0
-    );
-
-  color: #66566b;
-}
-
-
-/* =========================
-   AP
-========================= */
-
-.card-tag.appeal {
-  background:
-    linear-gradient(
-      135deg,
-      #fff6cf,
-      #ffe4a0
-    );
-
-  color: #66566b;
-}
-
-
-/* =========================
-   ブランド
-========================= */
-
-.card-brand {
-  grid-column: 2;
-
-  grid-row: 3;
-
-  margin-top: 5px;
-
-  color: #7d7181;
-
-  font-size: 10px;
-
-  font-weight: 600;
-}
-
-
-/* =========================
-   0件
-========================= */
-
-.no-results {
-  padding: 30px 10px;
-
-  color: #999;
-
-  text-align: center;
-
-  font-size: 14px;
-}
-
 
 /* ==================================================
-   ここから文字だけ可愛くする部分
-   ================================================== */
+パラレル
+================================================== */
 
+.card-tag.parallel {
+background:
+linear-gradient(
+135deg,
+#f2e5ff,
+#ffdff0
+);
 
-/* 「カードを登録」 */
-
-header h1 {
-  font-family:
-    "M PLUS Rounded 1c",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
-  color: #66566b;
-
-  font-weight: 800;
-
-  letter-spacing: 0.04em;
+color: #66566b;
 }
 
+/* ==================================================
+AP
+================================================== */
 
-/* 候補カード全体 */
+.card-tag.appeal {
+background:
+linear-gradient(
+135deg,
+#fff6cf,
+#ffe4a0
+);
 
-.card {
-  font-family:
-    "M PLUS Rounded 1c",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+color: #66566b;
 }
 
-
-/* カードID */
-
-.card-id {
-  font-family:
-    "M PLUS Rounded 1c",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
-  font-weight: 700;
-}
-
-
-/* カード名 */
-
-.card-name {
-  font-family:
-    "M PLUS Rounded 1c",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
-  color: #66566b;
-
-  font-weight: 700;
-
-  letter-spacing: 0.02em;
-}
-
-
-/* カード情報 */
-
-.card-tag {
-  font-family:
-    "M PLUS Rounded 1c",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
-  color: #66566b;
-
-  font-weight: 600;
-
-  letter-spacing: 0.01em;
-}
-
-
-/* ブランド */
+/* ==================================================
+ブランド
+================================================== */
 
 .card-brand {
-  font-family:
-    "M PLUS Rounded 1c",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+grid-column: 2;
 
-  color: #7d7181;
+grid-row: 3;
 
-  font-weight: 600;
+margin-top: 5px;
+
+color: #7d7181;
+
+font-size: 10px;
+
+font-weight: 600;
 }
 
+/* ==================================================
+0件
+================================================== */
 
-/* =========================
-   スマホ
-========================= */
+.no-results {
+padding: 30px 10px;
+
+color: #999;
+
+text-align: center;
+
+font-size: 14px;
+
+font-weight: 600;
+}
+
+/* ==================================================
+スマホ下部ナビ
+================================================== */
+
+.bottom-nav {
+position: fixed;
+
+left: 0;
+
+right: 0;
+
+bottom: 0;
+
+z-index: 200;
+
+display: flex;
+
+align-items: center;
+
+justify-content: space-around;
+
+height: 68px;
+
+padding:
+5px
+8px
+calc(5px + env(safe-area-inset-bottom));
+
+border-top: 1px solid #e5e5e5;
+
+background:
+rgba(255, 255, 255, 0.96);
+
+box-shadow:
+0 -2px 10px rgba(0, 0, 0, 0.05);
+
+backdrop-filter: blur(10px);
+}
+
+.bottom-nav-item {
+position: relative;
+
+display: flex;
+
+flex:
+1
+1
+0;
+
+flex-direction: column;
+
+align-items: center;
+
+justify-content: center;
+
+min-width: 0;
+
+height: 58px;
+
+border-radius: 10px;
+
+color: #999;
+
+text-decoration: none;
+
+transition:
+color 0.15s,
+background 0.15s;
+}
+
+.bottom-nav-item:hover {
+background: #faf7fb;
+}
+
+.bottom-nav-item.active {
+color: #66566b;
+}
+
+.nav-icon {
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+height: 24px;
+
+font-size: 21px;
+
+line-height: 1;
+}
+
+.nav-label {
+margin-top: 3px;
+
+font-size: 10px;
+
+font-weight: 600;
+
+line-height: 1;
+}
+
+/* ==================================================
+中央追加ボタン
+================================================== */
+
+.add-button {
+justify-content: flex-start;
+
+padding-top: 2px;
+}
+
+.add-circle {
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+width: 42px;
+
+height: 42px;
+
+margin-top: -10px;
+
+border: 4px solid white;
+
+border-radius: 50%;
+
+background:
+linear-gradient(
+135deg,
+#e678a2,
+#b879c9
+);
+
+color: white;
+
+font-size: 25px;
+
+font-weight: 500;
+
+line-height: 1;
+
+box-shadow:
+0 3px 8px rgba(0, 0, 0, 0.14);
+}
+
+.add-button .nav-label {
+margin-top: 2px;
+}
+
+/* ==================================================
+PCでは下部ナビを少し控えめに
+================================================== */
+
+@media screen and (min-width: 601px) {
+
+.bottom-nav {
+left: 50%;
+
+right: auto;
+
+width: 650px;
+
+transform: translateX(-50%);
+
+border-left: 1px solid #e5e5e5;
+
+border-right: 1px solid #e5e5e5;
+
+
+}
+
+}
+
+/* ==================================================
+スマホ
+================================================== */
 
 @media screen and (max-width: 600px) {
 
-  main {
-    padding:
-      14px
-      12px
-      40px;
-  }
+body {
+padding-bottom: 84px;
+}
+
+main {
+padding:
+14px
+12px
+40px;
+}
+
+.site-header {
+padding: 15px 16px;
+}
+
+.site-header h1 {
+font-size: 19px;
+}
+
+.button-list {
+gap: 7px;
+}
+
+.filter-button {
+min-height: 36px;
+
+padding:
+  6px
+  11px;
 
 
-  header {
-    padding: 16px;
-  }
+}
+
+.card {
+grid-template-columns:
+48px
+minmax(0, 1fr);
+
+column-gap: 9px;
+
+padding: 10px;
 
 
-  header h1 {
-    font-size: 19px;
-  }
+}
+
+.card-id {
+width: 44px;
+
+height: 44px;
 
 
-  .button-list {
-    gap: 7px;
-  }
+}
+
+.card-name {
+font-size: 13px;
+}
+
+.bottom-nav {
+height: 68px;
+}
+
+}
+
+/* ==================================================
+非常に小さい画面
+================================================== */
+
+@media screen and (max-width: 360px) {
+
+.site-header h1 {
+font-size: 18px;
+}
+
+.card {
+grid-template-columns:
+44px
+minmax(0, 1fr);
+
+column-gap: 8px;
+
+padding: 9px;
 
 
-  .filter-button {
-    min-height: 36px;
+}
 
-    padding:
-      6px
-      11px;
-  }
+.card-id {
+width: 40px;
 
+height: 40px;
 
-  .card {
-    grid-template-columns:
-      48px
-      minmax(0, 1fr);
-
-    column-gap: 9px;
-
-    padding: 10px;
-  }
+font-size: 9px;
 
 
-  .card-id {
-    width: 44px;
+}
 
-    height: 44px;
-  }
+.card-name {
+font-size: 12px;
+}
+
+.card-tag {
+font-size: 9px;
+
+padding:
+  3px
+  6px;
 
 
-  .card-name {
-    font-size: 13px;
-  }
+}
+
+.nav-label {
+font-size: 9px;
+}
 
 }
