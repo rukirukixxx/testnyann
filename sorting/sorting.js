@@ -2,13 +2,8 @@ const DATA_URL =
   "https://raw.githubusercontent.com/rukirukixxx/aikatuec-cardlist/main/data/20261008.json";
 
 
-let allCards = [];
-
-let selectedSeries = null;
-let selectedRarity = null;
-let selectedType = null;
-let selectedCategory = null;
-
+const cardList =
+  document.getElementById("card-list");
 
 const nameSearch =
   document.getElementById("name-search");
@@ -25,11 +20,16 @@ const typeButtons =
 const categoryButtons =
   document.getElementById("category-buttons");
 
-const cardList =
-  document.getElementById("card-list");
-
 const resultCount =
   document.getElementById("result-count");
+
+
+let allCards = [];
+
+let selectedSeries = null;
+let selectedRarity = null;
+let selectedType = null;
+let selectedCategory = null;
 
 
 /* =========================
@@ -64,7 +64,7 @@ fetch(DATA_URL)
 
     cardList.innerHTML = `
       <div class="no-results">
-        カードデータの読み込みに失敗しました
+        カードデータの読み込みに失敗しました。
       </div>
     `;
 
@@ -74,19 +74,22 @@ fetch(DATA_URL)
 
 
 /* =========================
-   フィルターボタン
+   フィルターボタン作成
 ========================= */
 
 function createFilterButtons() {
 
-  createButtons(
-    seriesButtons,
+  /* 弾 */
 
+  const series =
     getUniqueValues(
       allCards,
       "series_title"
-    ),
+    );
 
+  createButtons(
+    seriesButtons,
+    series,
     value => {
 
       selectedSeries =
@@ -104,7 +107,6 @@ function createFilterButtons() {
   /* レアリティ */
 
   createButtons(
-
     rarityButtons,
 
     [
@@ -125,7 +127,6 @@ function createFilterButtons() {
       displayCards();
 
     }
-
   );
 
 
@@ -149,11 +150,8 @@ function createFilterButtons() {
 
 
   createButtons(
-
     typeButtons,
-
     types,
-
     value => {
 
       selectedType =
@@ -165,7 +163,6 @@ function createFilterButtons() {
       displayCards();
 
     }
-
   );
 
 
@@ -187,11 +184,8 @@ function createFilterButtons() {
 
 
   createButtons(
-
     categoryButtons,
-
     categories,
-
     value => {
 
       selectedCategory =
@@ -203,7 +197,6 @@ function createFilterButtons() {
       displayCards();
 
     }
-
   );
 
 }
@@ -221,7 +214,6 @@ function createButtons(
 
   container.innerHTML = "";
 
-
   values.forEach(value => {
 
     const button =
@@ -238,7 +230,6 @@ function createButtons(
     button.dataset.value =
       value;
 
-
     button.addEventListener(
       "click",
       () => {
@@ -248,7 +239,6 @@ function createButtons(
       }
     );
 
-
     container.appendChild(button);
 
   });
@@ -257,7 +247,7 @@ function createButtons(
 
 
 /* =========================
-   選択状態
+   選択状態更新
 ========================= */
 
 function updateButtons() {
@@ -295,15 +285,11 @@ function updateButtonGroup(
       ".filter-button"
     );
 
-
   buttons.forEach(button => {
 
     button.classList.toggle(
       "active",
-
-      button.dataset.value ===
-        selected
-
+      button.dataset.value === selected
     );
 
   });
@@ -312,7 +298,7 @@ function updateButtonGroup(
 
 
 /* =========================
-   絞り込み
+   カード絞り込み
 ========================= */
 
 function displayCards() {
@@ -326,6 +312,8 @@ function displayCards() {
   const filtered =
     allCards.filter(card => {
 
+      /* 名前 */
+
       const matchesName =
         !keyword ||
         String(card.name)
@@ -333,28 +321,30 @@ function displayCards() {
           .includes(keyword);
 
 
+      /* 弾 */
+
       const matchesSeries =
         !selectedSeries ||
-        card.series_title ===
-          selectedSeries;
+        card.series_title === selectedSeries;
 
 
       /*
+        レアリティ
+
         PRを選択
-        → PRとPR★
+        → PR + PR★
 
         ERを選択
-        → ERとER★
+        → ER + ER★
 
         N / R
-        → そのまま
+        → N / Rのみ
       */
 
       const matchesRarity =
         !selectedRarity ||
 
-        card.rarity ===
-          selectedRarity ||
+        card.rarity === selectedRarity ||
 
         (
           selectedRarity === "PR" &&
@@ -367,10 +357,14 @@ function displayCards() {
         );
 
 
+      /* タイプ */
+
       const matchesType =
         !selectedType ||
         card.type === selectedType;
 
+
+      /* カテゴリ */
 
       const matchesCategory =
         !selectedCategory ||
@@ -414,7 +408,6 @@ function renderCards(cards) {
     `;
 
     return;
-
   }
 
 
@@ -425,12 +418,12 @@ function renderCards(cards) {
 
 
     /*
-      ここでCSS用クラスを付ける
+      CSS用クラス
 
+      rarity-n
+      rarity-r
       rarity-pr
       rarity-er
-      rarity-r
-      rarity-n
 
       type-cute
       type-cool
@@ -474,9 +467,7 @@ function renderCards(cards) {
 
       <div class="card-info">
 
-        <span
-          class="card-tag rarity-${getRarityTagClass(card.rarity)}"
-        >
+        <span class="card-tag rarity-${getRarityTagClass(card.rarity)}">
           ${escapeHTML(card.rarity)}
         </span>
 
@@ -638,7 +629,7 @@ nameSearch.addEventListener(
 
 
 /* =========================
-   重複削除
+   候補値取得
 ========================= */
 
 function getUniqueValues(
@@ -648,11 +639,9 @@ function getUniqueValues(
 
   return [
     ...new Set(
-
       cards
         .map(card => card[key])
         .filter(Boolean)
-
     )
   ];
 
@@ -666,30 +655,10 @@ function getUniqueValues(
 function escapeHTML(value) {
 
   return String(value ?? "")
-
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
 }
